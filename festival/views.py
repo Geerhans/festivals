@@ -51,4 +51,4 @@ def about(request):
     return render(request, 'festival/about.html')
 
 def contactUs(request):
-    return render(request, 'festival/contactUs')
+    return render(request, 'festival/contactUs.html')

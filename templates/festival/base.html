@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head> 
+        <title>
+            Festivals - 
+            {% block title_block %}
+                How to Tango with Django!
+            {% endblock %}
+        </title>
+    </head>
+
+    <body>
+        <div>
+            {% block body_block %}
+            {% endblock %}
+        </div>
+
+    </body>
+</html>
