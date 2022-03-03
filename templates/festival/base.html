@@ -4,11 +4,86 @@
 <html>
     <head> 
         <title>
-            Festivals - 
             {% block title_block %}
                 How to Tango with Django!
             {% endblock %}
         </title>
+        <style>
+        #container{
+
+        width:1700px;
+        background-color:rgb(255, 255, 255);
+
+        }
+
+        #header{
+
+        height:300px;
+
+        background-image: url(static/images/Index.png);
+        
+        background-size:100% 100%
+
+
+        }
+
+        .navigation{
+        height:30px;
+        position: relative; 
+        top: -16px;/*The distance from the top is -10*/
+        margin-bottom: 5px;
+        background-color: rgb(255, 127, 148);
+        }
+
+        #main{
+
+        height: 620px;
+
+        background: rgb(255, 255, 255);
+
+        }
+
+        #footer{
+
+        height: 0px;
+
+        background: yellowgreen;
+
+        }
+
+        .navigation ul{
+        /* clear the default style of the ul tag */
+        width: auto;/* width is also changed to auto */
+        list-style-type: none;
+        white-space:nowrap;
+        overflow: hidden;
+        margin-left: 5%;
+        padding: 0;
+        }
+
+        .navigation li {
+            float:left; /* Make the li content float horizontally, that is, arrange it horizontally */
+            margin-right:2%;  /* distance between two li */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navigation li a{
+        /* Set the format of the link content display */
+            display: block; /* Display the link as a block element to make the entire link area clickable */
+            color:white;
+            text-align: center;
+            padding: 3px;
+            overflow: hidden;
+            text-decoration: none; /* remove underscore */
+            
+        }
+        .navigation li a:hover{
+            /* The background turns black when the mouse is selected */
+            background-color: #111;
+        }
+
+        </style>
     </head>
 
     <body>
@@ -16,6 +91,5 @@
             {% block body_block %}
             {% endblock %}
         </div>
-
     </body>
 </html>
