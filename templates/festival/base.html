@@ -51,7 +51,7 @@
 
         }
 
-        .navigation ul{
+        ul.nav{
         /* clear the default style of the ul tag */
         width: auto;/* width is also changed to auto */
         list-style-type: none;
@@ -61,14 +61,14 @@
         padding: 0;
         }
 
-        .navigation li {
+        ul.nav>li {
             float:left; /* Make the li content float horizontally, that is, arrange it horizontally */
             margin-right:2%;  /* distance between two li */
             position: relative;
             overflow: hidden;
         }
 
-        .navigation li a{
+        ul.nav>li a{
         /* Set the format of the link content display */
             display: block; /* Display the link as a block element to make the entire link area clickable */
             color:white;
@@ -78,9 +78,123 @@
             text-decoration: none; /* remove underscore */
             
         }
-        .navigation li a:hover{
+        ul.nav.li a:hover{
             /* The background turns black when the mouse is selected */
-            background-color: #111;
+            background-color: rgb(226, 29, 29);
+        }
+
+
+        ul.country{
+        /* clear the default style of the ul tag */
+        width: auto;/* width is also changed to auto */
+        list-style-type: none;
+        white-space:nowrap;
+        overflow: hidden;
+        margin-left: 5%;
+        padding: 0;
+        }
+
+        ul.country>li {
+            float:left; /* Make the li content float horizontally, that is, arrange it horizontally */
+            margin-right:2%;  /* distance between two li */
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul.country>li a{
+        /* Set the format of the link content display */
+            display: block; /* Display the link as a block element to make the entire link area clickable */
+            color:rgb(0, 0, 0);
+            text-align: center;
+            padding: 3px;
+            overflow: hidden;
+            text-decoration: none; /* remove underscore */
+            
+        }
+        ul.country.li a:hover{
+            /* The background turns black when the mouse is selected */
+            background-color: rgb(226, 29, 29);
+        }
+
+        .bg1{
+            width: 250px;
+            height: 250px;
+        }
+
+        .button {
+        width:100px;
+        text-align:center;
+        line-height:100%;
+        padding:0.3em;
+        font:16px Arial,sans-serif bold;
+        font-style:normal;
+        text-decoration:none;
+        margin:2px;
+        margin-left: 50%;
+        vertical-align:text-bottom;
+        zoom:1;
+        outline:none;
+        font-size-adjust:none;
+        font-stretch:normal;
+        box-shadow:0px 1px 2px rgba(0,0,0,0.2);
+        text-shadow:0px 1px 1px rgba(0,0,0,0.3);
+        color:#fefee9;
+        border:0.2px solid #2299ff;
+        background-repeat:repeat;
+        background-size:auto;
+        background-origin:padding-box;
+        background-clip:padding-box;
+        background-color:#3399ff;
+        background: linear-gradient(to bottom, #eeeff9 0%,#3399ff 100%)
+        }
+
+        .btn-3d {
+        position: relative;
+	    display: inline-block;
+        width:100px;
+        height: 30px;
+        text-align:center;
+        line-height:100%;
+        font-size: 16px;
+        padding: 0.3em;
+        color: white;
+        margin:2px;
+        margin-left: 50%;
+        vertical-align:text-bottom;
+        zoom:1;
+        font-size-adjust:none;
+        font-stretch:normal;
+        border-radius: 6px;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+        margin:2px;
+        margin-left: 50%;
+        }       
+
+        .btn-3d.blue:hover   {background-color: #699DD1;}
+
+        .btn-3d:active {
+	    top: 9px;
+        }
+
+        .btn-3d.blue {
+            background-color: #6DA2D9;
+            box-shadow: 0 0 0 1px #6698cb inset,
+                        0 0 0 2px rgba(255,255,255,0.15) inset,
+                        0 8px 0 0 rgba(110, 164, 219, .7),
+                        0 8px 0 1px rgba(0,0,0,.4),
+                        0 8px 8px 1px rgba(0,0,0,0.5);
+        }
+        .btn-3d.blue:active {
+            box-shadow: 0 0 0 1px #6191C2 inset,
+                        0 0 0 2px rgba(255,255,255,0.15) inset,
+                        0 0 0 1px rgba(0,0,0,0.4);
+        }
+
+        p{
+            font-size:16px;
+            font-weight: bold;
+            padding-left: 80px;
+            padding-top:10px;
         }
 
         </style>
