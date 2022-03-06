@@ -1,7 +1,7 @@
 from django.urls import path
 from festival import views
 
-app_name = 'shareFestival'
+app_name = 'festival'
 
 urlpatterns = [
     path('', views.index, name='index'),
