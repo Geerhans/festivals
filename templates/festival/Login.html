@@ -1,14 +1,43 @@
 {% extends 'festival/base.html' %}
     {%load staticfiles %}
-    
+
     {% block title_block %}
-        Homepage
-    {% endblock %} 
+        Login
+    {% endblock %}
 
     {% block body_block %}
+    <div id="container">
         
-        <h1>Festivals says...</h1>
-        <div>
-            hey there partner!
-        </div>  
+        <div id="header"></div>
+        
+        <div class="navigation">
+                <ul class="nav">
+                    <li ><a href="#">ShareFestival</a></li>
+                    <li ><a href="#">Personal Center</a></li>
+                    <li ><a href="#">About</a></li>  
+                </ul>  
+        </div>
+        
+        <div id="main">
+            {% csrf_token %}
+            <div>Username: <input type="text" name="username" value="" size="50" /></div><br />
+            <div>Password: <input type="password" name="password" value="" size="50" /></div><br />
+            <input type="submit" value="submit" />
+            <div><u>Forget password?</u></div>
+            <div><hr width='15%'></div>
+            <div>Not got an count?<u>Sign up here</u></div>
+        </div>
+        
+        <div id="footer">
+
+            <div class="navigation">
+                <ul>
+                <li><a href="#">Contact us</a></li>
+                </ul>
+            </div>
+
+        </div>
+    
+        </div>
+        </form>
     {% endblock %}
