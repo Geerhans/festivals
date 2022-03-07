@@ -1,5 +1,6 @@
 from operator import mod
 from django.db import models
+from django.utils import timezone
 
 from django.utils import timezone
 
@@ -49,4 +50,8 @@ class Comment(models.Model):
         ordering = ('created',)
         verbose_name_plural = 'Comments'
     def __str__(self):
+
         return self.body[:20]
+
+        return self.body[:20]
+
