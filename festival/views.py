@@ -8,9 +8,9 @@ from django.http import HttpResponse
 def index(request):
  # 1. Query the database for a list of ALL countries currently stored.
  # 2. Order the countries by the number of views in ascending order.
-    country_list = Country.objects.order_by('views')[:5]
+    #country_list = Country.objects.order_by('views')[:5]
     context_dict = {}
-    context_dict['countries'] = country_list
+    #context_dict['countries'] = country_list
 
     #return HttpResponse("Welcome to shareFestival!")
     response = render(request, 'festival/index.html', context=context_dict)
