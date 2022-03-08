@@ -11,8 +11,8 @@ from django.utils import timezone
 
 class Country(models.Model):
 
-    countryID = models.IntegerField(max_length=128, unique=True)
-    countryname = models.CharField(max_length=128)
+    countryID = models.IntegerField(default=0)
+    countryname = models.CharField(max_length=128, unique=True)
     slug = models.SlugField()
     def save(self, *args, **kwargs):
         self.slug = slugify(self.countryname) 
@@ -28,17 +28,12 @@ class Country(models.Model):
 
 class Festival(models.Model):
 
-    festivalID = models.IntegerField(max_length=128, unique=True)
-    countryID = models.ManyToManyField(Country, on_delete=models.CASCADE)
+    festivalID = models.IntegerField(default=0)
+    countryname = models.ForeignKey(Country, on_delete=models.CASCADE)
     festivalname = models.CharField(max_length=128)
     body = models.TextField()
     #image = models.ImageField()
     views = models.IntegerField(default=0)
-    slug = models.SlugField()
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.festivalname) 
-        super(Festival, self).save(*args, **kwargs)
-
     
     class Meta:
         verbose_name_plural = 'Festivals'
@@ -48,7 +43,7 @@ class Festival(models.Model):
 
 
 class Story(models.Model):
-    storyID = models.IntegerField(max_length=128, unique=True)
+    storyID = models.IntegerField(unique=True)
     
     festivalID = models.ForeignKey(Festival, on_delete=models.CASCADE)
  #   userID = models.ForeignKey(User)
@@ -63,12 +58,12 @@ class Story(models.Model):
    #     super(Country, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('datePosted',)
         verbose_name_plural = 'Stories'
 
 
 class Comment(models.Model):
-    commentID = models.IntegerField(max_length=128, unique=True)
+    commentID = models.IntegerField(unique=True)
     StoryID = models.ForeignKey(Story, on_delete=models.CASCADE)
   #  userID = models.ForeignKey(User)
 # need a user foreignkey
@@ -76,7 +71,7 @@ class Comment(models.Model):
     datePosted = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('datePosted',)
         verbose_name_plural = 'Comments'
     def __str__(self):
         return self.body[:20]
