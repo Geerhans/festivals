@@ -1,6 +1,7 @@
 from operator import mod
 from django.db import models
 from django.utils import timezone
+from django.template.defaultfilters import slugify
 
 
 # Create your models here.
