@@ -1,57 +1,75 @@
 from operator import mod
 from django.db import models
 from django.utils import timezone
-
-from django.utils import timezone
+from django.template.defaultfilters import slugify
 
 # Create your models here.
+#class User(models.Model):
+
 
 class Country(models.Model):
-    name = models.CharField(max_length=128, unique=True)
-    
+    countryID = models.IntegerField(max_length=128, unique=True)
+    countryname = models.CharField(max_length=128)
+    slug = models.SlugField()
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.countryname) 
+        super(Country, self).save(*args, **kwargs)
     class Meta:
         verbose_name_plural = 'Countries'
     
     def __str__(self):
-        return self.name
+        return self.countryname
 
     
 
 class Festival(models.Model):
-    country = models.ManyToManyField(Country)
-    title = models.CharField(max_length=128)
+    festivalID = models.IntegerField(max_length=128, unique=True)
+    countryID = models.ManyToManyField(Country)
+    festivalname = models.CharField(max_length=128)
     body = models.TextField()
+    #image = models.ImageField()
+    views = models.IntegerField(default=0)
+    slug = models.SlugField()
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.festivalname) 
+        super(Festival, self).save(*args, **kwargs)
     
     class Meta:
         verbose_name_plural = 'Festivals'
 
     def __str__(self): 
-        return self.title
-
+        return self.festivalname
 
 class Story(models.Model):
-    festival = models.ForeignKey(Festival, on_delete=models.CASCADE)
+    storyID = models.IntegerField(max_length=128, unique=True)
+    
+    festivalID = models.ForeignKey(Festival, on_delete=models.CASCADE)
+ #   userID = models.ForeignKey(User)
 # need a user foreignkey
-    body = models.TextField()
-    created = models.DateTimeField(default=timezone.now)
-
+    storyMessage = models.TextField()
+    datePosted = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
+    likes = models.IntegerField(default=0)
+   # slug = models.SlugField()
+   # def save(self, *args, **kwargs):
+   #     self.slug = slugify(self.countryname) 
+   #     super(Country, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ('created',)
         verbose_name_plural = 'Stories'
 
+
 class Comment(models.Model):
-    story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='comment')
+    commentID = models.IntegerField(max_length=128, unique=True)
+    StoryID = models.ForeignKey(Story, on_delete=models.CASCADE)
+  #  userID = models.ForeignKey(User)
 # need a user foreignkey
-    body = models.TextField()
-    created = models.DateTimeField(auto_now=True)
+    commentMessage = models.TextField()
+    datePosted = models.DateTimeField(auto_now=True)
+
     class Meta:
         ordering = ('created',)
         verbose_name_plural = 'Comments'
     def __str__(self):
-
         return self.body[:20]
-
-        return self.body[:20]
-
