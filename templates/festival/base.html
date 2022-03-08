@@ -49,6 +49,12 @@
 
         }
 
+        #main_country{
+            height: 300px;
+            width: 300px;
+            background-color:  rgb(255, 255, 255);
+        }
+
         #footer{
 
         height: 0px;
@@ -96,7 +102,7 @@
         list-style-type: none;
         white-space:nowrap;
         overflow: hidden;
-        margin-left: 5%;
+        margin-left: 10%;
         padding: 0;
         }
 
@@ -159,10 +165,27 @@
             background-color: rgb(226, 29, 29);
         }
 
+        ul.country_name{
+            /* clear the default style of the ul tag */
+            width: auto;/* width is also changed to auto */
+            list-style-type: none;
+            white-space:nowrap;
+            overflow: hidden;
+            margin-left: 5%;
+            padding: 0;
+        }
+
+        ul.country_name>li {
+            float:left; /* Make the li content float horizontally, that is, arrange it horizontally */
+            margin-right:2%;  /* distance between two li */
+            position: relative;
+            overflow: hidden;
+        
+        }
+
         .bg1{
             width: 250px;
             height: 250px;
-            top: 100px;
             position: relative; 
         }
 

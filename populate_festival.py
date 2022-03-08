@@ -3,57 +3,63 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','festivals.settings')
 
 import django
 django.setup()
-from festival.models import Category,Page
+from festival.models import Country,Festival
 
 def populate():
-    # 首先创建一些字典，列出想添加到各分类的网页
-    # 然后创建一个嵌套字典，设置各分类
-    # 这么做看起来不易理解，但是便于迭代，方便为模型添加数据
 
-    python_pages = [
-        {"title": "Official Python Tutorial","url":"http://docs.python.org/2/tutorial/","views":32},
-        {"title":"How to Think like a Computer Scientist","url":"http://www.greenteapress.com/thinkpython/","views":16},
-        {"title":"Learn Python in 10 Minutes","url":"http://www.korokithakis.net/tutorials/python/","views":8}]
+    china_festivals = [
+        {"festivalname": "National Day","body":"the history about the festival","festivalID":1},
+        {"festivalname":"Dragon Boat Festival","body":"the history about the festival","festivalID":2},
+        {"festivalname":"Army Day","body":"the history about the festival","festivalID":3}]
 
-    django_pages = [
-        {"title":"Official Django Tutorial","url":"https://docs.djangoproject.com/en/1.9/intro/tutorial01/", "views":32},
-        {"title":"Django Rocks","url":"http://www.djangorocks.com/","views":16},
-        {"title":"How to Tango with Django","url":"http://www.tangowithdjango.com/","views":8}]
+    india_festivals = [
+        {"festivalname":"Holi","body":"the history about the festival","festivalID":1},
+        {"festivalname":"Independence Day","body":"the history about the festival","festivalID":2},
+        {"festivalname":"Dussehra","body":"the history about the festival","festivalID":3}]
 
-    other_pages = [
-        {"title":"Bottle","url":"http://bottlepy.org/docs/dev/","views":32},
-        {"title":"Flask","url":"http://flask.pocoo.org","views":16}]
+    uk_festivals = [
+        {"festivalname":"AllSaintsDay","body":"the history about the festival","festivalID":1},
+        {"festivalname":"Christmas Day","body":"the history about the festival","festivalID":2}]
 
-    cats = {"Python": {"pages": python_pages,'views':128,'likes':64},
-        "Django": {"pages": django_pages,'views':64,'likes':32},
-        "Other Frameworks": {"pages": other_pages,'views':32,'likes':16}}
+    us_festivals = [
+        {"festivalname":"Independence Day","body":"the history about the festival","festivalID":1},
+        {"festivalname":"Thanksgiving Day","body":"the history about the festival","festivalID":2}]
 
-    # 下述代码迭代 cats 字典，添加各分类，并把相关的网页添加到分类中
-    for cat,cat_data in cats.items():
-        c = add_country(cat,cat_data['views'],cat_data['likes'])
-        for p in cat_data["pages"]:
-            add_page(c,p["title"],p["url"],p['views'])
+    italy_festivals = [
+        {"festivalname":"carnevale","body":"the history about the festival","festivalID":1},
+        {"festivalname":"natale","body":"the history about the festival","festivalID":2}]
+    
+    countries = {"CHINA": {"festivals": china_festivals,"countryID":1},
+        "INDIA": {"festivals": india_festivals,"countryID":2},
+        "UK": {"festivals": uk_festivals,"countryID":3},
+        "US": {"festivals": us_festivals,"countryID":4},
+        "ITALY": {"festivals": italy_festivals,"countryID":5}}
 
-    # 打印添加的分类
-    for c in Category.objects.all():
-        for p in Page.objects.filter(category=c):
-            print("-{0}-{1}".format(str(c),str(p)))
+ 
+    for cou,cou_data in countries.items():
+        c = add_country(cou,cou_data["countryID"])
+        for f in cou_data["festivals"]:
+            add_festival(c,f["festivalname"],f["body"],f["festivalID"])
 
-def add_page(cat,title,url,views):
-    p = Page.objects.get_or_create(category=cat,title=title)[0]
-    p.url = url
-    p.views = views
-    p.save()
-    return p
+ 
+    for c in Country.objects.all():
+        for f in Festival.objects.filter(countryname=c):
+            print("-{0}-{1}".format(str(c),str(f)))
 
-def add_country(name,views,likes):
-    c = Category.objects.get_or_create(name=name)[0]
-    c.views=views
-    c.likes=likes
+def add_festival(countryname,festivalname,body,festivalID):
+    f = Festival.objects.get_or_create(countryname=countryname,festivalname=festivalname)[0]
+    f.body =body
+    f.festivalID=festivalID
+    f.save()
+    return f
+
+def add_country(countryname,countryID):
+    c = Country.objects.get_or_create(countryname=countryname)[0]
+    c.countryID=countryID
     c.save()
     return c
 
 if __name__ == '__main__':
-    print("Starting Rango population script...")
-    populate()
+        print("Starting Festival population script...")
+        populate()
     
