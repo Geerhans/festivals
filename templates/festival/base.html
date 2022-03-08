@@ -29,16 +29,30 @@
         height:30px;
         position: relative; 
         top: -16px;/*The distance from the top is -10*/
-        margin-bottom: 5px;
+        margin-bottom: -16px;
         background-color: rgb(255, 127, 148);
         }
 
         #main{
 
-        height: 620px;
+        height: 640px;
 
         background: rgb(255, 255, 255);
 
+        }
+
+        #main1{
+
+        height: 850px;
+
+        background-color:  rgb(255, 255, 255);
+
+        }
+
+        #main_country{
+            height: 300px;
+            width: 300px;
+            background-color:  rgb(255, 255, 255);
         }
 
         #footer{
@@ -88,7 +102,7 @@
         list-style-type: none;
         white-space:nowrap;
         overflow: hidden;
-        margin-left: 5%;
+        margin-left: 10%;
         padding: 0;
         }
 
@@ -151,9 +165,40 @@
             background-color: rgb(226, 29, 29);
         }
 
+        ul.country_name{
+            /* clear the default style of the ul tag */
+            width: auto;/* width is also changed to auto */
+            list-style-type: none;
+            white-space:nowrap;
+            overflow: hidden;
+            margin-left: 5%;
+            padding: 0;
+        }
+
+        ul.country_name>li {
+            float:left; /* Make the li content float horizontally, that is, arrange it horizontally */
+            margin-right:2%;  /* distance between two li */
+            position: relative;
+            overflow: hidden;
+        
+        }
+
         .bg1{
             width: 250px;
             height: 250px;
+            position: relative; 
+        }
+
+        .bg2{
+            width: 100%;
+            height: 100%; 
+        }
+
+        .bg3{
+            width: 275px;
+            height: 275px;
+            top: 50px;
+            position: relative; 
         }
 
         .button {
@@ -225,13 +270,6 @@
                         0 0 0 1px rgba(0,0,0,0.4);
         }
 
-        p{
-            font-size:16px;
-            font-weight: bold;
-            padding-left: 80px;
-            padding-top:10px;
-        }
-
         div .loginFirst{
             padding-left: 600px;
             padding-top:160px;
@@ -256,8 +294,24 @@
             padding-left: 700px;
             padding-top:10px;
         }
+      
+        #mcontent {
+        margin-top: 9%;
+        margin-left: 22%;
+        width: 50%;
+        font-size: 14px;
+        height: 60%;
+        line-height: 1.5;
+        }
 
-
+        #mcontent2 {
+        margin-top: 44px;
+        margin-left: 0%;
+        width: 270px;
+        font-size: 14px;
+        height: 50%;
+        line-height: 1.5;
+        }
         </style>
     </head>
 

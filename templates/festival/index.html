@@ -11,10 +11,10 @@
         
         <div class="navigation">
                 <ul class="nav">
-                    <li ><a href="festival/shareStory/">ShareFestival</a></li>
-                    <li ><a href="festival/personalCenter/">Personal Center</a></li>
-                    <li ><a href="festival/about/">About</a></li>  
-                    <a href="#" class="btn-3d" style="height: 30px">Login</a>
+                    <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
+                    <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                    <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                    <a href="{% url 'festival:login' %}" class="btn-3d" style="height: 30px">Login</a>
                 </ul>  
         </div> 
         
@@ -33,17 +33,73 @@
 
                  <div>
                     <ul class="country">
-                        <li class="CountryImage" > <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                        <li> <img class="bg1" src="{% static 'images/Army Day.jpg' %}"alt="Picture of Rango" /></li>
-                        <li> <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                        <li> <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                       <li>
+                           <div id="main_country">
+                               <ul>
+                                   <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                   <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                               </ul>
+                            </div>
+                        </li>
+                        <li> 
+                            <div id="main_country">
+                                <ul>
+                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                                </ul>
+                             </div>
+                        </li>
+                        <li> 
+                            <div id="main_country">
+                                <ul>
+                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                                </ul>
+                             </div>
+                        </li>
+                        <li>
+                            <div id="main_country">
+                                <ul>
+                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                                </ul>
+                             </div>
+                        </li>
                     </ul>
 
                     <ul class="country">
-                        <li class="CountryImage" > <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                        <li> <img class="bg1" src="{% static 'images/Army Day.jpg' %}"alt="Picture of Rango" /></li>
-                        <li> <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                        <li> <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                        <li>
+                            <div id="main_country">
+                                <ul>
+                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                                </ul>
+                             </div>
+                        </li>
+                        <li>
+                            <div id="main_country">
+                                <ul>
+                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                                </ul>
+                             </div>
+                        </li>
+                        <li>
+                            <div id="main_country">
+                                <ul>
+                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                                </ul>
+                             </div>
+                        </li>
+                        <li>
+                            <div id="main_country">
+                                <ul>
+                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
+                                </ul>
+                             </div>
+                        </li>
                     </ul>
                  </div>
             
@@ -53,7 +109,7 @@
 
             <div class="navigation">
                 <ul>
-                <li><a href="festival/contactUs/">Contact us</a></li>
+                <li><a href="{% url 'festival:contactUs' %}">Contact us</a></li>
                 </ul>
             </div>
 

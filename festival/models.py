@@ -3,17 +3,21 @@ from django.db import models
 from django.utils import timezone
 from django.template.defaultfilters import slugify
 
+from django.utils import timezone
+
 # Create your models here.
 #class User(models.Model):
 
 
 class Country(models.Model):
+
     countryID = models.IntegerField(max_length=128, unique=True)
     countryname = models.CharField(max_length=128)
     slug = models.SlugField()
     def save(self, *args, **kwargs):
         self.slug = slugify(self.countryname) 
         super(Country, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = 'Countries'
     
@@ -23,8 +27,9 @@ class Country(models.Model):
     
 
 class Festival(models.Model):
+
     festivalID = models.IntegerField(max_length=128, unique=True)
-    countryID = models.ManyToManyField(Country)
+    countryID = models.ManyToManyField(Country, on_delete=models.CASCADE)
     festivalname = models.CharField(max_length=128)
     body = models.TextField()
     #image = models.ImageField()
@@ -33,12 +38,14 @@ class Festival(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.festivalname) 
         super(Festival, self).save(*args, **kwargs)
+
     
     class Meta:
         verbose_name_plural = 'Festivals'
 
     def __str__(self): 
         return self.festivalname
+
 
 class Story(models.Model):
     storyID = models.IntegerField(max_length=128, unique=True)
@@ -73,3 +80,4 @@ class Comment(models.Model):
         verbose_name_plural = 'Comments'
     def __str__(self):
         return self.body[:20]
+
