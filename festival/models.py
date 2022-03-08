@@ -11,13 +11,13 @@ class Country(models.Model):
 
     countryID = models.IntegerField(default=0)
     countryname = models.CharField(max_length=128, unique=True)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.countryname) 
         super(Country, self).save(*args, **kwargs)
 
-
+    class Meta:
         verbose_name_plural = 'Countries'
     
     def __str__(self):
