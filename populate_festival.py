@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','festivals.settings')
 
 import django
 django.setup()
-from festival.models import Country,Festival
+from festival.models import Country, Festival
 
 def populate():
 
