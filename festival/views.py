@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
-from festival.models import Country, Festival, Story, Comment
+from festival.models import Country, Festival
 
 
 # Create your views here.

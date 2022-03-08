@@ -1,15 +1,12 @@
 from operator import mod
 from django.db import models
 from django.utils import timezone
-from django.template.defaultfilters import slugify
 
-from django.utils import timezone
 
 # Create your models here.
-#class User(models.Model):
-
 
 class Country(models.Model):
+
 
     countryID = models.IntegerField(default=0)
     countryname = models.CharField(max_length=128, unique=True)
@@ -19,7 +16,7 @@ class Country(models.Model):
         self.slug = slugify(self.countryname) 
         super(Country, self).save(*args, **kwargs)
 
-    class Meta:
+
         verbose_name_plural = 'Countries'
     
     def __str__(self):
@@ -29,18 +26,21 @@ class Country(models.Model):
 
 class Festival(models.Model):
 
+
     festivalID = models.IntegerField(default=0)
     countryname = models.ForeignKey(Country, on_delete=models.CASCADE)
     festivalname = models.CharField(max_length=128)
     body = models.TextField()
     #image = models.ImageField()
     views = models.IntegerField(default=0)
+
     
     class Meta:
         verbose_name_plural = 'Festivals'
 
     def __str__(self): 
         return self.festivalname
+
 
 
 class Story(models.Model):
