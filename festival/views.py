@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
-from festival.models import Country, Festival
+from festival.models import Country, Festival, Story, Comment
 from datetime import datetime
 
 
@@ -10,24 +10,37 @@ from datetime import datetime
 from django.http import HttpResponse 
 def index(request):
  # 1. Query the database for a list of ALL countries currently stored.
- # 2. Order the countries by the number of views in ascending order.
-    country_list = Country.objects.order_by('views')[:5]
+ # 2. Filter the popular festival by the number of views in ascending order.
+    popular_festival = Festival.objects.order_by('views')[:3]
+    country_list = Country.objects.all()
+
     context_dict = {}
+    context_dict['popular_festival'] = popular_festival
     context_dict['countries'] = country_list
 
     visitor_cookie_handler(request)
 
-    #return HttpResponse("Welcome to shareFestival!")
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
 def festivalHistory(request):
+    festival_history = Festival.objects.all()
+
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivalHistory'] = festival_history
     context_dict['visits'] = request.session['visits']
+
+    visitor_cookie_handler(request)
+    
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
 def shareStory(request):
+    story = Story.objects.all()
+    comment = Comment.objects.all()
+
+    context_dict = {}
+    context_dict['stories'] = story
+    context_dict['comments'] = comment
     return render(request, 'festival/shareStory.html')
 
 def personalCenter(request):
@@ -67,34 +80,60 @@ def contactUs(request):
     return render(request, 'festival/contactUs.html')
 
 def India(request):
+    #list of festivals by a particular country
+    festival_list = Festival.objects.filter(festival__countryname='India')
+
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/india.html', context=context_dict)
+    
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/india.html', context=context_dict)
 
 def UK(request):
+    festival_list = Festival.objects.filter(festival__countryname='UK')
+
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/UK.html', context=context_dict)
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/UK.html', context=context_dict)
 
 def USA(request):
+    festival_list = Festival.objects.filter(festival__countryname='USA')
+
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/USA.html', context=context_dict)
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/USA.html', context=context_dict)
 
 def Italy(request):
+    festival_list = Festival.objects.filter(festival__countryname='Italy')
+    
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/italy.html', context=context_dict)
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/italy.html', context=context_dict)
 
 def China(request):
+    festival_list = Festival.objects.filter(festival__countryname='China')
+    
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/china.html', context=context_dict)
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/china.html', context=context_dict)
 
 #Handle cookies
 def visitor_cookie_handler(request, response):
