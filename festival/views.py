@@ -28,12 +28,15 @@ def index(request):
     return response
 
 def view_festivalHistory(request, festival_name_slug):
-    festival = Festival.objects.get(slug=festival_name_slug)
-    festival_history = Festival.objects.filter(festival)
-
     context_dict = {}
-    context_dict['festivalHistory'] = festival_history
-    context_dict['visits'] = request.session['visits']
+    try:
+        festival = Festival.objects.get(slug=festival_name_slug)
+        festival_history = Festival.objects.filter(festival)
+        context_dict['festivalHistory'] = festival_history
+        context_dict['visits'] = request.session['visits']
+    except Festival.DoesNotExist:
+        context_dict['festivalHistory'] = None
+        context_dict['visits'] = None
 
     visitor_cookie_handler(request)
     
@@ -41,13 +44,17 @@ def view_festivalHistory(request, festival_name_slug):
 
 @login_required
 def shareStory(request, festival_name_slug):
-    festival = Festival.objects.get(slug=festival_name_slug)
-    story = Story.objects.filter(festival)
-    comment = Comment.objects.filter(festival)
-
     context_dict = {}
-    context_dict['stories'] = story
-    context_dict['comments'] = comment
+    try: 
+        festival = Festival.objects.get(slug=festival_name_slug)
+        story = Story.objects.filter(festival)
+        comment = Comment.objects.filter(festival)
+        context_dict['stories'] = story
+        context_dict['comments'] = comment
+    except Festival.DoesNotExist:
+        context_dict['stories'] = None
+        context_dict['comments'] = None
+        
     return render(request, 'festival/shareStory.html', context=context_dict)
 
 @login_required
@@ -84,14 +91,18 @@ def signUp(request):
 
 def about(request):
     context_dict = {}
-    visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
+
+    visitor_cookie_handler(request)
+
     return render(request, 'festival/about.html', context=context_dict)
 
 def contactUs(request):
     context_dict = {}
-    visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
+
+    visitor_cookie_handler(request)
+
     return render(request, 'festival/contactUs.html', context=context_dict)
 
 def view_country(request, country_name_slug):
