@@ -13,9 +13,12 @@ urlpatterns = [
     path('logout/', views.user_logout, name='user_logout'),
     path('signup/', views.signUp, name='signUp'),
     path('contactUs/', views.contactUs, name='contactUs'),
-    path('india/', views.India, name='India'),
-    path('UK/', views.UK, name='UK'),
-    path('USA/', views.USA, name='USA'),
-    path('italy/', views.Italy, name='Italy'),
-    path('china/', views.China, name='China'),
+    path('country/<slug:country_name_slug>/', views.view_country, name='country'),
+
+   ''' path('country/india/', views.India, name='India'),
+    path('country/UK/', views.UK, name='UK'),
+    path('country/USA/', views.USA, name='USA'),
+    path('country/italy/', views.Italy, name='Italy'),
+    path('country/china/', views.China, name='China'),'''
+
 ]

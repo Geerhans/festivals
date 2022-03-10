@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','festivals.settings')
 
 import django
 django.setup()
-from festival.models import Country,Festival
+from festival.models import Country, Festival
 
 def populate():
 
@@ -18,7 +18,7 @@ def populate():
         {"festivalname":"Dussehra","body":"the history about the festival","festivalID":3}]
 
     uk_festivals = [
-        {"festivalname":"AllSaintsDay","body":"the history about the festival","festivalID":1},
+        {"festivalname":"All Saints Day","body":"the history about the festival","festivalID":1},
         {"festivalname":"Christmas Day","body":"the history about the festival","festivalID":2}]
 
     us_festivals = [
@@ -26,8 +26,8 @@ def populate():
         {"festivalname":"Thanksgiving Day","body":"the history about the festival","festivalID":2}]
 
     italy_festivals = [
-        {"festivalname":"carnevale","body":"the history about the festival","festivalID":1},
-        {"festivalname":"natale","body":"the history about the festival","festivalID":2}]
+        {"festivalname":"Carnevale","body":"the history about the festival","festivalID":1},
+        {"festivalname":"Natale","body":"the history about the festival","festivalID":2}]
     
     countries = {"CHINA": {"festivals": china_festivals,"countryID":1},
         "INDIA": {"festivals": india_festivals,"countryID":2},

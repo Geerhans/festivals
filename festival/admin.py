@@ -1,6 +1,14 @@
 from django.contrib import admin
-from festival.models import Country,Festival
+
+
+from festival.models import Country, Story, Festival, Comment
 # Register your models here.
-admin.site.register(Country)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('countryname',)}
+
+admin.site.register(Country, CategoryAdmin)
+admin.site.register(Story)
 admin.site.register(Festival)
+admin.site.register(Comment)
+
 
