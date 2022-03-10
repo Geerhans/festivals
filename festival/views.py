@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from festival.models import Country, Festival, Story, Comment
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -34,6 +35,7 @@ def festivalHistory(request):
     
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
+@login_required
 def shareStory(request):
     story = Story.objects.all()
     comment = Comment.objects.all()
@@ -43,6 +45,7 @@ def shareStory(request):
     context_dict['comments'] = comment
     return render(request, 'festival/shareStory.html', context=context_dict)
 
+@login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
 
@@ -66,6 +69,7 @@ def Login(request):
     else:
         return render(request, 'festival/Login.html')
 
+@login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('festival:index'))
