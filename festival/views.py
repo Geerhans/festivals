@@ -24,8 +24,9 @@ def index(request):
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
-def festivalHistory(request):
-    festival_history = Festival.objects.all()
+def festivalHistory(request, country_name_slug):
+    country = Country.objects.get(slug=country_name_slug)
+    festival_history = Festival.objects.filter(country)
 
     context_dict = {}
     context_dict['festivalHistory'] = festival_history
