@@ -27,9 +27,9 @@ def index(request):
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
-def festivalHistory(request, country_name_slug):
-    country = Country.objects.get(slug=country_name_slug)
-    festival_history = Festival.objects.filter(country)
+def view_festivalHistory(request, festival_name_slug):
+    festival = Country.objects.get(slug=festival_name_slug)
+    festival_history = Festival.objects.filter(festival)
 
     context_dict = {}
     context_dict['festivalHistory'] = festival_history
@@ -40,9 +40,10 @@ def festivalHistory(request, country_name_slug):
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
 @login_required
-def shareStory(request):
-    story = Story.objects.all()
-    comment = Comment.objects.all()
+def shareStory(request, festival_name_slug):
+    festival = Country.objects.get(slug=festival_name_slug)
+    story = Story.objects.filter(festival)
+    comment = Comment.objects.filter(festival)
 
     context_dict = {}
     context_dict['stories'] = story
