@@ -19,12 +19,15 @@
         </div>
         
         <div id="main">
-            <div class="loginFirst" >Username: <input type="text" name="username" value="" size="50" /></div><br />
-            <div class="loginfollow" >Password: <input type="password" name="password" value="" size="50" /></div><br />
-            <div class="loginbutton" ><input type="submit" value="submit" /></div>
-            <div class="logintipForget"><u>Forgot Password?</u></div>
-            <div><hr width='15%'></div>
-            <div class="logintipSignup">Not got an account?<u>Sign up here</u></div>
+            <form id="login_form" method="post" action="{% url 'festival:login' %}">
+                {% csrf_token %}
+                <div class="loginFirst" >Username: <input type="text" name="username" value="" size="50" /></div><br />
+                <div class="loginfollow" >Password: <input type="password" name="password" value="" size="50" /></div><br />
+                <div class="loginbutton" ><input type="submit" value="submit" /></div>
+                <div class="logintipForget"><u>Forget password?</u></div>
+                <div><hr width='15%'></div>
+                <div class="logintipSignup">Not got an count?<u>Sign up here</u></div>
+            </form>
         </div>
         
         <div id="footer">
