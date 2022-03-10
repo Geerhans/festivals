@@ -6,12 +6,10 @@ from festival.models import Country, Festival, Story, Comment
 from datetime import datetime
 from festival.forms import UserForm, UserProfileForm
 from django.http import HttpResponse
-
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
-
+#Page Views
 def index(request):
  # 1. Query the database for a list of ALL countries currently stored.
  # 2. Filter the popular festival by the number of views in ascending order.
@@ -28,6 +26,7 @@ def index(request):
     return response
 
 def view_festivalHistory(request, festival_name_slug):
+    # 1. View the festival history of the selected festival
     context_dict = {}
     try:
         festival = Festival.objects.get(slug=festival_name_slug)
@@ -43,7 +42,8 @@ def view_festivalHistory(request, festival_name_slug):
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
 @login_required
-def shareStory(request, festival_name_slug):
+def view_shareStory(request, festival_name_slug):
+    # 1. View the festival stories of the selected festival posted by other users 
     context_dict = {}
     try: 
         festival = Festival.objects.get(slug=festival_name_slug)
@@ -60,31 +60,6 @@ def shareStory(request, festival_name_slug):
 @login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
-
-                login(request, user)
-                return redirect(reverse('festival:index'))
-            else:
-                return HttpResponse("Your shareStory account is disabled.")
-        else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'festival/Login.html')
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect(reverse('festival:index'))
 
 def about(request):
     context_dict = {}
@@ -118,57 +93,35 @@ def view_country(request, country_name_slug):
     visitor_cookie_handler(request)
 
     return render(request, 'festival/country.html', context=context_dict)
-    '''
-    def UK(request, country_name_slug):
-        #list of festivals by a particular country
-        try:
-            country = Country.objects.filter(slug=country_name_slug)
-            festival_list = Festival.objects.filter(festival__countryname=country)
-        
-            context_dict = {}
-            context_dict['festivals'] = festival_list
-            context_dict['visits'] = request.session['visits']
-        except Country.DoesNotExist:
-            context_dict['festivals'] = None
-            context_dict['visits'] = None
 
-        visitor_cookie_handler(request)
 
-        return render(request, 'festival/country/UK.html', context=context_dict)
+#User Authentications
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-    def USA(request):
-        festival_list = Festival.objects.filter(festival__countryname='USA')
+        user = authenticate(username=username, password=password)
 
-        context_dict = {}
-        context_dict['festivals'] = festival_list
-        context_dict['visits'] = request.session['visits']
+        if user:
+            if user.is_active:
 
-        visitor_cookie_handler(request)
+                login(request, user)
+                return redirect(reverse('festival:index'))
+            else:
+                return HttpResponse("Your shareStory account is disabled.")
+        else:
+            print("Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'festival/Login.html')
 
-        return render(request, 'festival/country/USA.html', context=context_dict)
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('festival:index'))   
 
-    def Italy(request):
-        festival_list = Festival.objects.filter(festival__countryname='Italy')
-        
-        context_dict = {}
-        context_dict['festivals'] = festival_list
-        context_dict['visits'] = request.session['visits']
 
-        visitor_cookie_handler(request)
-
-        return render(request, 'festival/country/italy.html', context=context_dict)
-
-    def China(request):
-        festival_list = Festival.objects.filter(festival__countryname='China')
-        
-        context_dict = {}
-        context_dict['festivals'] = festival_list
-        context_dict['visits'] = request.session['visits']
-
-        visitor_cookie_handler(request)
-
-        return render(request, 'festival/country/china.html', context=context_dict)
-    '''
 #Handle cookies
 def visitor_cookie_handler(request, response):
     visits = int(request.COOKIES.get('visits', '1'))
