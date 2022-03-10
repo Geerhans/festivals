@@ -13,5 +13,5 @@ urlpatterns = [
     path('contactUs/', views.contactUs, name='contactUs'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
-    path('country/<slug:country_name_slug>/', views.view_country, name='country'),
+    path('country/<slug:country_name_slug>/', views.view_country, name='view_country'),
 ]

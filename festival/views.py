@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
  # 1. Query the database for a list of ALL countries currently stored.
  # 2. Filter the popular festival by the number of views in ascending order.
-    popular_festival = Festival.objects.order_by('views')[:3]
+    popular_festival = Festival.objects.all()
     country_list = Country.objects.all()
 
     context_dict = {}
@@ -81,14 +81,16 @@ def view_country(request, country_name_slug):
     # 1. lists the festivals of a particular country
     try:
         country = Country.objects.get(slug=country_name_slug)
-        festival_list = Festival.objects.filter(festival__countryname=country)
+        festivals= Festival.objects.filter(countryname=country)
+        country_list = Country.objects.all()
 
         context_dict = {}
-        context_dict['festivals'] = festival_list
-        context_dict['visits'] = request.session['visits']
+        context_dict['festivals'] = festivals
+        context_dict['country'] = country
+        context_dict['countries'] = country_list
     except Country.DoesNotExist:
         context_dict['festivals'] = None
-        context_dict['visits'] = None
+        context_dict['country'] = None
 
     visitor_cookie_handler(request)
 

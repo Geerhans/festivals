@@ -29,11 +29,11 @@ def populate():
         {"festivalname":"Carnevale","body":"the history about the festival","festivalID":1},
         {"festivalname":"Natale","body":"the history about the festival","festivalID":2}]
     
-    countries = {"CHINA": {"festivals": china_festivals,"countryID":1},
-        "INDIA": {"festivals": india_festivals,"countryID":2},
-        "UK": {"festivals": uk_festivals,"countryID":3},
-        "US": {"festivals": us_festivals,"countryID":4},
-        "ITALY": {"festivals": italy_festivals,"countryID":5}}
+    countries = {"china": {"festivals": china_festivals,"countryID":1},
+        "india": {"festivals": india_festivals,"countryID":2},
+        "uk": {"festivals": uk_festivals,"countryID":3},
+        "us": {"festivals": us_festivals,"countryID":4},
+        "italy": {"festivals": italy_festivals,"countryID":5}}
 
  
     for cou,cou_data in countries.items():
