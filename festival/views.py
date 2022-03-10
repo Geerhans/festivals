@@ -2,10 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
-from festival.models import Country, Festival
+from festival.models import Country, Festival, Story, Comment
 from datetime import datetime
+<<<<<<< HEAD
 from festival.forms import UserForm, UserProfileForm
 from django.http import HttpResponse
+=======
+>>>>>>> 49e725f8657c4935418a3024b2a365b3a760d04a
 from django.contrib.auth.decorators import login_required
 
 
@@ -13,27 +16,41 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
  # 1. Query the database for a list of ALL countries currently stored.
- # 2. Order the countries by the number of views in ascending order.
-    country_list = Country.objects.order_by('views')[:5]
+ # 2. Filter the popular festival by the number of views in ascending order.
+    popular_festival = Festival.objects.order_by('views')[:3]
+    country_list = Country.objects.all()
+
     context_dict = {}
+    context_dict['popular_festival'] = popular_festival
     context_dict['countries'] = country_list
 
     visitor_cookie_handler(request)
 
-    #return HttpResponse("Welcome to shareFestival!")
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
 def festivalHistory(request):
+    festival_history = Festival.objects.all()
+
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivalHistory'] = festival_history
     context_dict['visits'] = request.session['visits']
+
+    visitor_cookie_handler(request)
+    
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
 @login_required
 def shareStory(request):
-    return render(request, 'festival/shareStory.html')
+    story = Story.objects.all()
+    comment = Comment.objects.all()
 
+    context_dict = {}
+    context_dict['stories'] = story
+    context_dict['comments'] = comment
+    return render(request, 'festival/shareStory.html', context=context_dict)
+
+@login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
 
@@ -56,6 +73,10 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'festival/Login.html')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 49e725f8657c4935418a3024b2a365b3a760d04a
 @login_required
 def user_logout(request):
     logout(request)
@@ -65,41 +86,84 @@ def signUp(request):
     return render(request, 'festival/signUp.html')
 
 def about(request):
-    return render(request, 'festival/about.html')
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'festival/about.html', context=context_dict)
 
 def contactUs(request):
-    return render(request, 'festival/contactUs.html')
-
-def India(request):
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/india.html', context=context_dict)
+    return render(request, 'festival/contactUs.html', context=context_dict)
 
-def UK(request):
-    context_dict = {}
+def view_country(request, country_name_slug):
+    # 1. lists the festivals of a particular country
+    try:
+        country = Country.objects.get(slug=country_name_slug)
+        festival_list = Festival.objects.filter(festival__countryname=country)
+
+        context_dict = {}
+        context_dict['festivals'] = festival_list
+        context_dict['visits'] = request.session['visits']
+    except Country.DoesNotExist:
+        context_dict['festivals'] = None
+        context_dict['visits'] = None
+
     visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/UK.html', context=context_dict)
+
+    return render(request, 'festival/country.html', context=context_dict)
+'''
+def UK(request, country_name_slug):
+    #list of festivals by a particular country
+    try:
+        country = Country.objects.filter(slug=country_name_slug)
+        festival_list = Festival.objects.filter(festival__countryname=country)
+    
+        context_dict = {}
+        context_dict['festivals'] = festival_list
+        context_dict['visits'] = request.session['visits']
+    except Country.DoesNotExist:
+        context_dict['festivals'] = None
+        context_dict['visits'] = None
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/UK.html', context=context_dict)
 
 def USA(request):
+    festival_list = Festival.objects.filter(festival__countryname='USA')
+
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/USA.html', context=context_dict)
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/USA.html', context=context_dict)
 
 def Italy(request):
+    festival_list = Festival.objects.filter(festival__countryname='Italy')
+    
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/italy.html', context=context_dict)
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/italy.html', context=context_dict)
 
 def China(request):
+    festival_list = Festival.objects.filter(festival__countryname='China')
+    
     context_dict = {}
-    visitor_cookie_handler(request)
+    context_dict['festivals'] = festival_list
     context_dict['visits'] = request.session['visits']
-    return render(request, 'festival/china.html', context=context_dict)
 
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/china.html', context=context_dict)
+'''
 #Handle cookies
 def visitor_cookie_handler(request, response):
     visits = int(request.COOKIES.get('visits', '1'))
