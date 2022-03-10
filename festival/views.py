@@ -4,11 +4,9 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from festival.models import Country, Festival, Story, Comment
 from datetime import datetime
-<<<<<<< HEAD
 from festival.forms import UserForm, UserProfileForm
 from django.http import HttpResponse
-=======
->>>>>>> 49e725f8657c4935418a3024b2a365b3a760d04a
+
 from django.contrib.auth.decorators import login_required
 
 
@@ -73,10 +71,7 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'festival/Login.html')
-<<<<<<< HEAD
-=======
 
->>>>>>> 49e725f8657c4935418a3024b2a365b3a760d04a
 @login_required
 def user_logout(request):
     logout(request)
