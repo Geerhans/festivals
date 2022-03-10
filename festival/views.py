@@ -28,7 +28,7 @@ def index(request):
     return response
 
 def view_festivalHistory(request, festival_name_slug):
-    festival = Country.objects.get(slug=festival_name_slug)
+    festival = Festival.objects.get(slug=festival_name_slug)
     festival_history = Festival.objects.filter(festival)
 
     context_dict = {}
@@ -41,7 +41,7 @@ def view_festivalHistory(request, festival_name_slug):
 
 @login_required
 def shareStory(request, festival_name_slug):
-    festival = Country.objects.get(slug=festival_name_slug)
+    festival = Festival.objects.get(slug=festival_name_slug)
     story = Story.objects.filter(festival)
     comment = Comment.objects.filter(festival)
 
