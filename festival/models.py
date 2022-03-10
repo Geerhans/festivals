@@ -8,8 +8,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Country(models.Model):
-
-
     countryID = models.IntegerField(default=0)
     countryname = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(unique=True)
@@ -27,16 +25,18 @@ class Country(models.Model):
     
 
 class Festival(models.Model):
-
-
     festivalID = models.IntegerField(default=0)
     countryname = models.ForeignKey(Country, on_delete=models.CASCADE)
     festivalname = models.CharField(max_length=128)
     body = models.TextField()
     #image = models.ImageField()
     views = models.IntegerField(default=0)
-
+    slug = models.SlugField(unique=True)
     
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.festivalname) 
+        super(Country, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = 'Festivals'
 

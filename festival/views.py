@@ -27,8 +27,9 @@ def index(request):
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
-def festivalHistory(request):
-    festival_history = Festival.objects.all()
+def view_festivalHistory(request, festival_name_slug):
+    festival = Festival.objects.get(slug=festival_name_slug)
+    festival_history = Festival.objects.filter(festival)
 
     context_dict = {}
     context_dict['festivalHistory'] = festival_history
@@ -39,9 +40,10 @@ def festivalHistory(request):
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
 @login_required
-def shareStory(request):
-    story = Story.objects.all()
-    comment = Comment.objects.all()
+def shareStory(request, festival_name_slug):
+    festival = Festival.objects.get(slug=festival_name_slug)
+    story = Story.objects.filter(festival)
+    comment = Comment.objects.filter(festival)
 
     context_dict = {}
     context_dict['stories'] = story
@@ -105,57 +107,57 @@ def view_country(request, country_name_slug):
     visitor_cookie_handler(request)
 
     return render(request, 'festival/country.html', context=context_dict)
-'''
-def UK(request, country_name_slug):
-    #list of festivals by a particular country
-    try:
-        country = Country.objects.filter(slug=country_name_slug)
-        festival_list = Festival.objects.filter(festival__countryname=country)
-    
+    '''
+    def UK(request, country_name_slug):
+        #list of festivals by a particular country
+        try:
+            country = Country.objects.filter(slug=country_name_slug)
+            festival_list = Festival.objects.filter(festival__countryname=country)
+        
+            context_dict = {}
+            context_dict['festivals'] = festival_list
+            context_dict['visits'] = request.session['visits']
+        except Country.DoesNotExist:
+            context_dict['festivals'] = None
+            context_dict['visits'] = None
+
+        visitor_cookie_handler(request)
+
+        return render(request, 'festival/country/UK.html', context=context_dict)
+
+    def USA(request):
+        festival_list = Festival.objects.filter(festival__countryname='USA')
+
         context_dict = {}
         context_dict['festivals'] = festival_list
         context_dict['visits'] = request.session['visits']
-    except Country.DoesNotExist:
-        context_dict['festivals'] = None
-        context_dict['visits'] = None
 
-    visitor_cookie_handler(request)
+        visitor_cookie_handler(request)
 
-    return render(request, 'festival/country/UK.html', context=context_dict)
+        return render(request, 'festival/country/USA.html', context=context_dict)
 
-def USA(request):
-    festival_list = Festival.objects.filter(festival__countryname='USA')
+    def Italy(request):
+        festival_list = Festival.objects.filter(festival__countryname='Italy')
+        
+        context_dict = {}
+        context_dict['festivals'] = festival_list
+        context_dict['visits'] = request.session['visits']
 
-    context_dict = {}
-    context_dict['festivals'] = festival_list
-    context_dict['visits'] = request.session['visits']
+        visitor_cookie_handler(request)
 
-    visitor_cookie_handler(request)
+        return render(request, 'festival/country/italy.html', context=context_dict)
 
-    return render(request, 'festival/country/USA.html', context=context_dict)
+    def China(request):
+        festival_list = Festival.objects.filter(festival__countryname='China')
+        
+        context_dict = {}
+        context_dict['festivals'] = festival_list
+        context_dict['visits'] = request.session['visits']
 
-def Italy(request):
-    festival_list = Festival.objects.filter(festival__countryname='Italy')
-    
-    context_dict = {}
-    context_dict['festivals'] = festival_list
-    context_dict['visits'] = request.session['visits']
+        visitor_cookie_handler(request)
 
-    visitor_cookie_handler(request)
-
-    return render(request, 'festival/country/italy.html', context=context_dict)
-
-def China(request):
-    festival_list = Festival.objects.filter(festival__countryname='China')
-    
-    context_dict = {}
-    context_dict['festivals'] = festival_list
-    context_dict['visits'] = request.session['visits']
-
-    visitor_cookie_handler(request)
-
-    return render(request, 'festival/country/china.html', context=context_dict)
-'''
+        return render(request, 'festival/country/china.html', context=context_dict)
+    '''
 #Handle cookies
 def visitor_cookie_handler(request, response):
     visits = int(request.COOKIES.get('visits', '1'))
