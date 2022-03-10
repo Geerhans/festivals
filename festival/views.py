@@ -4,10 +4,14 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from festival.models import Country, Festival, Story, Comment
 from datetime import datetime
+from festival.forms import UserForm, UserProfileForm
+from django.http import HttpResponse
+
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-from django.http import HttpResponse 
+
 def index(request):
  # 1. Query the database for a list of ALL countries currently stored.
  # 2. Filter the popular festival by the number of views in ascending order.
@@ -23,8 +27,9 @@ def index(request):
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
-def festivalHistory(request):
-    festival_history = Festival.objects.all()
+def festivalHistory(request, country_name_slug):
+    country = Country.objects.get(slug=country_name_slug)
+    festival_history = Festival.objects.filter(country)
 
     context_dict = {}
     context_dict['festivalHistory'] = festival_history
@@ -34,6 +39,7 @@ def festivalHistory(request):
     
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
+@login_required
 def shareStory(request):
     story = Story.objects.all()
     comment = Comment.objects.all()
@@ -43,10 +49,11 @@ def shareStory(request):
     context_dict['comments'] = comment
     return render(request, 'festival/shareStory.html', context=context_dict)
 
+@login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
 
-def Login(request):
+def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -61,11 +68,12 @@ def Login(request):
             else:
                 return HttpResponse("Your shareStory account is disabled.")
         else:
-            print("Invalid login details: {username}, {password}")
+            print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'festival/Login.html')
 
+@login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('festival:index'))
@@ -185,3 +193,38 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
         
     request.session['visits'] = visits
+
+def register(request):
+
+    registered = False
+    
+    if request.method == 'POST':
+
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+        
+        if user_form.is_valid() and profile_form.is_valid(): 
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+        
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture'] 
+            profile.save()
+
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+    # Render the template depending on the context.
+    return render(request, 
+                  'rango/register.html',
+                  context = {'user_form': user_form,
+                             'profile_form': profile_form,
+                             'registered': registered})
