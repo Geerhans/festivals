@@ -65,32 +65,7 @@ def view_shareStory(request):
 @login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
-'''
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
-
-                login(request, user)
-                return redirect(reverse('festival:index'))
-            else:
-                return HttpResponse("Your shareStory account is disabled.")
-        else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'festival/Login.html')
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect(reverse('festival:index'))
-'''
 def about(request):
     context_dict = {}
     visitor_cookie_handler(request)
@@ -107,14 +82,16 @@ def view_country(request, country_name_slug):
     # 1. lists the festivals of a particular country
     try:
         country = Country.objects.get(slug=country_name_slug)
-        festival_list = Festival.objects.filter(festival__countryname=country)
+        festivals= Festival.objects.filter(countryname=country)
+        country_list = Country.objects.all()
 
         context_dict = {}
-        context_dict['festivals'] = festival_list
-        context_dict['visits'] = request.session['visits']
+        context_dict['festivals'] = festivals
+        context_dict['country'] = country
+        context_dict['countries'] = country_list
     except Country.DoesNotExist:
         context_dict['festivals'] = None
-        context_dict['visits'] = None
+        context_dict['country'] = None
 
     visitor_cookie_handler(request)
 
@@ -133,7 +110,7 @@ def visitor_cookie_handler(request, response):
         request.session['last_visit'] = str(datetime.now())
     else:
         request.session['last_visit'] = last_visit_cookie
-    request.session['visits'] = visits
+    response.set_cookie('visits', visits)
 
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
@@ -155,6 +132,10 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
         
     request.session['visits'] = visits
+
+
+
+#Unwanted codes
 '''
 def register(request):
 
@@ -190,4 +171,31 @@ def register(request):
                   context = {'user_form': user_form,
                              'profile_form': profile_form,
                              'registered': registered})
+'''
+
+'''
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+
+                login(request, user)
+                return redirect(reverse('festival:index'))
+            else:
+                return HttpResponse("Your shareStory account is disabled.")
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'festival/Login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('festival:index'))
 '''
