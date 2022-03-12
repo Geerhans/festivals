@@ -53,7 +53,7 @@ def shareStory(request, festival_name_slug):
 @login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
-
+'''
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -78,7 +78,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('festival:index'))
-
+'''
 def about(request):
     context_dict = {}
     visitor_cookie_handler(request)
@@ -193,7 +193,7 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
         
     request.session['visits'] = visits
-
+'''
 def register(request):
 
     registered = False
@@ -228,3 +228,4 @@ def register(request):
                   context = {'user_form': user_form,
                              'profile_form': profile_form,
                              'registered': registered})
+'''
