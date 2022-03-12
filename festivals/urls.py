@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('festival/',include('festival.urls')),
+    path('festival/',include('festival.urls', namespace='festival')),
     path('', views.index, name='index'),
-]
+    path('accounts/', include('registration.backends.simple.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

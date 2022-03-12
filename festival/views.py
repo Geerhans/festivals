@@ -6,14 +6,16 @@ from festival.models import Country, Festival, Story, Comment
 from datetime import datetime
 from festival.forms import UserForm, UserProfileForm
 from django.http import HttpResponse
+
 from django.contrib.auth.decorators import login_required
 
 
-#Page Views
+# Create your views here.
+
 def index(request):
  # 1. Query the database for a list of ALL countries currently stored.
  # 2. Filter the popular festival by the number of views in ascending order.
-    popular_festival = Festival.objects.all()
+    popular_festival = Festival.objects.order_by('views')[:3]
     country_list = Country.objects.all()
 
     context_dict = {}
@@ -61,44 +63,7 @@ def view_shareStory(request):
 @login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
-
-def about(request):
-    context_dict = {}
-    context_dict['visits'] = request.session['visits']
-
-    visitor_cookie_handler(request)
-
-    return render(request, 'festival/about.html', context=context_dict)
-
-def contactUs(request):
-    context_dict = {}
-    context_dict['visits'] = request.session['visits']
-
-    visitor_cookie_handler(request)
-
-    return render(request, 'festival/contactUs.html', context=context_dict)
-
-def view_country(request, country_name_slug):
-    # 1. lists the festivals of a particular country
-    try:
-        country = Country.objects.get(slug=country_name_slug)
-        festivals= Festival.objects.filter(countryname=country)
-        country_list = Country.objects.all()
-
-        context_dict = {}
-        context_dict['festivals'] = festivals
-        context_dict['country'] = country
-        context_dict['countries'] = country_list
-    except Country.DoesNotExist:
-        context_dict['festivals'] = None
-        context_dict['country'] = None
-
-    visitor_cookie_handler(request)
-
-    return render(request, 'festival/country.html', context=context_dict)
-
-
-#User Authentications
+'''
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -114,7 +79,7 @@ def user_login(request):
             else:
                 return HttpResponse("Your shareStory account is disabled.")
         else:
-            print("Invalid login details: {username}, {password}")
+            print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'festival/Login.html')
@@ -122,43 +87,87 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return redirect(reverse('festival:index'))   
+    return redirect(reverse('festival:index'))
+'''
+def about(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'festival/about.html', context=context_dict)
 
-def register(request):
+def contactUs(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'festival/contactUs.html', context=context_dict)
 
-    registered = False
-    
-    if request.method == 'POST':
+def view_country(request, country_name_slug):
+    # 1. lists the festivals of a particular country
+    try:
+        country = Country.objects.get(slug=country_name_slug)
+        festival_list = Festival.objects.filter(festival__countryname=country)
 
-        user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
+        context_dict = {}
+        context_dict['festivals'] = festival_list
+        context_dict['visits'] = request.session['visits']
+    except Country.DoesNotExist:
+        context_dict['festivals'] = None
+        context_dict['visits'] = None
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country.html', context=context_dict)
+'''
+def UK(request, country_name_slug):
+        #list of festivals by a particular country
+    try:
+        country = Country.objects.filter(slug=country_name_slug)
+        festival_list = Festival.objects.filter(festival__countryname=country)
         
-        if user_form.is_valid() and profile_form.is_valid(): 
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
+        context_dict = {}
+        context_dict['festivals'] = festival_list
+        context_dict['visits'] = request.session['visits']
+    except Country.DoesNotExist:
+        context_dict['festivals'] = None
+        context_dict['visits'] = None
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/UK.html', context=context_dict)
+
+def USA(request):
+    festival_list = Festival.objects.filter(festival__countryname='USA')
+
+    context_dict = {}
+    context_dict['festivals'] = festival_list
+    context_dict['visits'] = request.session['visits']
+
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/USA.html', context=context_dict)
+
+def Italy(request):
+    festival_list = Festival.objects.filter(festival__countryname='Italy')
         
-            profile = profile_form.save(commit=False)
-            profile.user = user
+    context_dict = {}
+    context_dict['festivals'] = festival_list
+    context_dict['visits'] = request.session['visits']
 
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture'] 
-            profile.save()
+    visitor_cookie_handler(request)
 
-            registered = True
-        else:
-            print(user_form.errors, profile_form.errors)
-    else:
+    return render(request, 'festival/country/italy.html', context=context_dict)
 
-        user_form = UserForm()
-        profile_form = UserProfileForm()
-    # Render the template depending on the context.
-    return render(request, 
-                  'festival/register.html',
-                  context = {'user_form': user_form,
-                             'profile_form': profile_form,
-                             'registered': registered})
+def China(request):
+    festival_list = Festival.objects.filter(festival__countryname='China')
+        
+    context_dict = {}
+    context_dict['festivals'] = festival_list
+    context_dict['visits'] = request.session['visits']
 
+    visitor_cookie_handler(request)
+
+    return render(request, 'festival/country/china.html', context=context_dict)
+''' 
 #Handle cookies
 def visitor_cookie_handler(request, response):
     visits = int(request.COOKIES.get('visits', '1'))
@@ -194,4 +203,39 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
         
     request.session['visits'] = visits
+'''
+def register(request):
 
+    registered = False
+    
+    if request.method == 'POST':
+
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+        
+        if user_form.is_valid() and profile_form.is_valid(): 
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+        
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture'] 
+            profile.save()
+
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+    # Render the template depending on the context.
+    return render(request, 
+                  'rango/register.html',
+                  context = {'user_form': user_form,
+                             'profile_form': profile_form,
+                             'registered': registered})
+'''

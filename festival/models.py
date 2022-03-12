@@ -43,7 +43,7 @@ class Story(models.Model):
     
     festivalID = models.ForeignKey(Festival, on_delete=models.CASCADE)
  #   userID = models.ForeignKey(User)
-# need a user foreignkey
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     storyMessage = models.TextField()
     datePosted = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
@@ -79,3 +79,4 @@ class UserProfile(models.Model):
     picture = models.ImageField(upload_to='profile_images', blank=True)
     def __str__(self):
         return self.user.username
+
