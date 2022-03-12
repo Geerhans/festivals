@@ -73,7 +73,7 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'festival/Login.html')
-'''
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -157,7 +157,7 @@ def China(request):
     visitor_cookie_handler(request)
 
     return render(request, 'festival/country/china.html', context=context_dict)
-    
+''' 
 #Handle cookies
 def visitor_cookie_handler(request, response):
     visits = int(request.COOKIES.get('visits', '1'))
