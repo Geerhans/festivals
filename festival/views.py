@@ -40,7 +40,7 @@ def view_festivalHistory(request, festival_name_slug):
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
 @login_required
-def shareStory(request, festival_name_slug):
+def view_shareStory(request, festival_name_slug):
     festival = Festival.objects.get(slug=festival_name_slug)
     story = Story.objects.filter(festival)
     comment = Comment.objects.filter(festival)
