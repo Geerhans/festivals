@@ -31,9 +31,7 @@ class Festival(models.Model):
     body = models.TextField()
     #image = models.ImageField()
     views = models.IntegerField(default=0)
-
-    class Meta:
-        verbose_name_plural = 'Festivals'
+    
 
     def __str__(self): 
         return self.festivalname

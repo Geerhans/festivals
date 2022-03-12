@@ -25,11 +25,11 @@ def index(request):
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
-def view_festivalHistory(request, festival_name_slug):
+def view_festivalHistory(request):
     # 1. View the festival history of the selected festival
     context_dict = {}
     try:
-        festival = Festival.objects.get(slug=festival_name_slug)
+        festival = Festival.objects.get(festival)
         festival_history = Festival.objects.filter(festival)
         context_dict['festivalHistory'] = festival_history
         context_dict['visits'] = request.session['visits']
@@ -42,11 +42,12 @@ def view_festivalHistory(request, festival_name_slug):
     return render(request, 'festival/festivalHistory.html', context=context_dict)
 
 @login_required
-def view_shareStory(request, festival_name_slug):
+def view_shareStory(request):
     # 1. View the festival stories of the selected festival posted by other users 
     context_dict = {}
     try: 
-        festival = Festival.objects.get(slug=festival_name_slug)
+       # festival = Festival.objects.get(festivalSlug=festival_name_slug)
+        festival = Festival.objects.get(festival)
         story = Story.objects.filter(festival)
         comment = Comment.objects.filter(festival)
         context_dict['stories'] = story
