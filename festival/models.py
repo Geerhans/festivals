@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 class Country(models.Model):
     countryID = models.IntegerField(default=0)
     countryname = models.CharField(max_length=128, unique=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(blank=True,unique=True)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.countryname) 
@@ -31,11 +31,6 @@ class Festival(models.Model):
     body = models.TextField()
     #image = models.ImageField()
     views = models.IntegerField(default=0)
-    slug = models.SlugField(unique=True)
-    
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.festivalname) 
-        super(Country, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Festivals'

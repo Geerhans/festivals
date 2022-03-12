@@ -2,12 +2,18 @@
     {%load staticfiles %}
     
     {% block title_block %}
+        {% if country %}
+            {{ country.countryname }}
+        {% else %}
+            Unknown Country
+        {% endif %}
     {% endblock %} 
 
     {% block body_block %}
+    
     <div id="container">
         
-        <div id="header"></div>
+        <div id="header"> <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of Festival" /></div>
         
         <div class="navigation">
                 <ul class="nav">
@@ -19,89 +25,42 @@
         </div> 
         
         <div id="main">
-                 <div>
-                     <ul class="country">
-                         <li class="GroupCategory" >Select Country</li>
-                         <li class="CountryCategory" >Most Popular</li>
-                         <li ><strong><a href="festival/china/">CHINA</a></strong></li>
-                         <li ><a href="festival/india/">INDIA</a></li>
-                         <li ><a href="festival/UK/">UK</a></li>
-                         <li ><a href="festival/USA/">USA</a></li>
-                         <li ><a href="festival/italy/">ITALY</a></li>
-                     </ul>
-                 </div>
-
-                 <div>
+                <div>
+                    {% if countries %}
                     <ul class="country">
-                       <li>
-                           <div id="main_country">
-                               <ul>
-                                   <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                   <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                               </ul>
-                            </div>
-                        </li>
-                        <li> 
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li> 
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
+                        <li class="GroupCategory" >Select Country</li>
+                        <li class="CountryCategory" >Most Popular</li>
+                        {% for country in countries %}
+                        <li><a href="{% url 'festival:view_country' country.slug %}">{{country.countryname}}</a></li>
+                        {% endfor %}
                     </ul>
+                    {% else %}
+                    <strong>There are no countries present.</strong>
+                    {% endif %}
+                </div>
 
-                    <ul class="country">
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">festival_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                    </ul>
-                 </div>
+                <div>
+                    {% if country %}
+                        {% if festivals %}
+                        <ul class="country">
+                            {% for festival in festivals %}
+                            <li>
+                                <div id="main_country">
+                                    <ul>
+                                        <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                        <li><a href="{% url 'festival:index' %}">{{festival.festivalname}}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <strong>No pages currently in category.</strong>>
+                        {% endif %}
+                    {% else %}
+                        The specified country does not exist.
+                    {% endif %}
+                </div>
             
         </div>
         
@@ -115,5 +74,5 @@
 
         </div>
     
-        </div>
+    </div>
     {% endblock %}

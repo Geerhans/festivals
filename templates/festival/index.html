@@ -7,7 +7,9 @@
     {% block body_block %}
     <div id="container">
         
-        <div id="header"></div>
+        <div id="header">
+            <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of Festival" />
+        </div>
         
         <div class="navigation">
                 <ul class="nav">
@@ -21,66 +23,23 @@
         <div id="main">
 
                  <div>
-                    <ul class="country">
-                       <li>
-                           <div id="main_country">
-                               <ul>
-                                   <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                   <li><a href="{% url 'festival:index' %}">Country_name</a></li>
-                               </ul>
-                            </div>
-                        </li>
-                        <li>       
-                        </li>
-                        <li> 
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                    </ul>
-
-                    <ul class="country">
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                            <div id="main_country">
-                                <ul>
-                                    <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                    <li><a href="{% url 'festival:index' %}">Country_name</a></li>
-                                </ul>
-                             </div>
-                        </li>
-                        <li>
-                           
-                        </li>
-                    </ul>
-                 </div>
-            
+                    {% if countries %}
+                        <ul class="country">
+                            {% for country in countries %}
+                            <li>
+                                <div id="main_country">
+                                    <ul>
+                                        <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                        <li><a href="{% url 'festival:view_country' country.slug %}">{{country.countryname}}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% else %}
+                    <strong>There are no countries present.</strong>
+                    {% endif %} 
         </div>
         
         <div id="footer">
