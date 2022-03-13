@@ -27,21 +27,22 @@ def index(request):
     response = render(request, 'festival/index.html', context=context_dict)
     return response
 
-def view_festivalHistory(request):
-    # 1. View the festival history of the selected festival
-    context_dict = {}
+def view_festivalHistory(request,festival_name_slug):
+    # 1. lists the festivals of a particular country
     try:
-        festival = Festival.objects.get(festival)
-        festival_history = Festival.objects.filter(festival)
-        context_dict['festivalHistory'] = festival_history
-        context_dict['visits'] = request.session['visits']
-    except Festival.DoesNotExist:
-        context_dict['festivalHistory'] = None
-        context_dict['visits'] = None
+        festival = Festival.objects.get(slug=festival_name_slug)
+        
+
+        context_dict = {}
+        context_dict['festival'] = festival
+        
+    except Country.DoesNotExist:
+        context_dict['festival'] = None
+
 
     visitor_cookie_handler(request)
-    
     return render(request, 'festival/festivalHistory.html', context=context_dict)
+
 
 @login_required
 def view_shareStory(request):

@@ -31,7 +31,12 @@ class Festival(models.Model):
     body = models.TextField()
     #image = models.ImageField()
     views = models.IntegerField(default=0)
-    
+    slug = models.SlugField(blank=True)
+    image_url=models.URLField(max_length=200,default="spring.jpg")
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.festivalname) 
+        super(Festival, self).save(*args, **kwargs)
 
     def __str__(self): 
         return self.festivalname

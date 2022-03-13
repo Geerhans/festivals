@@ -8,26 +8,26 @@ from festival.models import Country, Festival
 def populate():
 
     china_festivals = [
-        {"festivalname": "National Day","body":"the history about the festival","festivalID":1},
-        {"festivalname":"Dragon Boat Festival","body":"the history about the festival","festivalID":2},
-        {"festivalname":"Army Day","body":"the history about the festival","festivalID":3}]
+        {"festivalname": "National Day","body":"the history about the festival","festivalID":1,"image_url":"National Day.jpg"},
+        {"festivalname":"Dragon Boat Festival","body":"the history about the festival","festivalID":2,"image_url":"National Day.jpg"},
+        {"festivalname":"Army Day","body":"the history about the festival","festivalID":3,"image_url":"National Day.jpg"}]
 
     india_festivals = [
-        {"festivalname":"Holi","body":"the history about the festival","festivalID":1},
-        {"festivalname":"Independence Day","body":"the history about the festival","festivalID":2},
-        {"festivalname":"Dussehra","body":"the history about the festival","festivalID":3}]
+        {"festivalname":"Holi","body":"the history about the festival","festivalID":1,"image_url":"National Day.jpg"},
+        {"festivalname":"Independence Day","body":"the history about the festival","festivalID":2,"image_url":"National Day.jpg"},
+        {"festivalname":"Dussehra","body":"the history about the festival","festivalID":3,"image_url":"National Day.jpg"}]
 
     uk_festivals = [
-        {"festivalname":"All Saints Day","body":"the history about the festival","festivalID":1},
-        {"festivalname":"Christmas Day","body":"the history about the festival","festivalID":2}]
+        {"festivalname":"All Saints Day","body":"the history about the festival","festivalID":1,"image_url":"National Day.jpg"},
+        {"festivalname":"Christmas Day","body":"the history about the festival","festivalID":2,"image_url":"National Day.jpg"}]
 
     us_festivals = [
-        {"festivalname":"Independence Day","body":"the history about the festival","festivalID":1},
-        {"festivalname":"Thanksgiving Day","body":"the history about the festival","festivalID":2}]
+        {"festivalname":"Independence Day","body":"the history about the festival","festivalID":1,"image_url":"National Day.jpg"},
+        {"festivalname":"Thanksgiving Day","body":"the history about the festival","festivalID":2,"image_url":"National Day.jpg"}]
 
     italy_festivals = [
-        {"festivalname":"Carnevale","body":"the history about the festival","festivalID":1},
-        {"festivalname":"Natale","body":"the history about the festival","festivalID":2}]
+        {"festivalname":"Carnevale","body":"the history about the festival","festivalID":1,"image_url":"National Day.jpg"},
+        {"festivalname":"Natale","body":"the history about the festival","festivalID":2,"image_url":"National Day.jpg"}]
     
     countries = {"china": {"festivals": china_festivals,"countryID":1},
         "india": {"festivals": india_festivals,"countryID":2},

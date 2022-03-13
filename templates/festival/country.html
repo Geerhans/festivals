@@ -48,7 +48,7 @@
                                 <div id="main_country">
                                     <ul>
                                         <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
-                                        <li><a href="{% url 'festival:index' %}">{{festival.festivalname}}</a></li>
+                                        <li><a href="{% url 'festival:view_festivalHistory' festival.slug %}">{{festival.festivalname}}</a></li>
                                     </ul>
                                 </div>
                             </li>

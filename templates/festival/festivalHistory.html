@@ -9,20 +9,22 @@
     <div id="container">
         <div class="navigation">
                 <ul class="nav">
-                    <li ><a href="#">ShareFestival</a></li>
-                    <li ><a href="#">Personal Center</a></li>
-                    <li ><a href="#">About</a></li>  
-                    <a href="#" class="btn-3d" style="height: 30px">Login</a>
+                    <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
+                    <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                    <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                    <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
                 </ul>  
                
         </div>
         
         <div id="main1">
-            
-            <textarea id="mcontent" onfocus="setcolor(id)" onblur="savecolor(id)">.....
-            </textarea>
+            {% if festival %}
+                <textarea id="mcontent" onfocus="setcolor(id)" onblur="savecolor(id)">{{festival.body}}
+                </textarea>
 
-            
+            {% else %}
+            The specified festival does not exist.
+            {% endif %}
         </div>
         
         <div id="footer">
