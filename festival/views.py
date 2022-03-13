@@ -45,8 +45,10 @@ def view_festivalHistory(request,festival_name_slug):
 
 
 @login_required
+
 def view_shareStory(request):
     # 1. View the festival stories of the selected festival posted by other users 
+
     context_dict = {}
     try: 
        # festival = Festival.objects.get(festivalSlug=festival_name_slug)
@@ -64,32 +66,7 @@ def view_shareStory(request):
 @login_required
 def personalCenter(request):
     return render(request, 'festival/personalCenter.html')
-'''
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
-
-                login(request, user)
-                return redirect(reverse('festival:index'))
-            else:
-                return HttpResponse("Your shareStory account is disabled.")
-        else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'festival/Login.html')
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect(reverse('festival:index'))
-'''
 def about(request):
     context_dict = {}
     visitor_cookie_handler(request)
@@ -134,7 +111,7 @@ def visitor_cookie_handler(request, response):
         request.session['last_visit'] = str(datetime.now())
     else:
         request.session['last_visit'] = last_visit_cookie
-    request.session['visits'] = visits
+    response.set_cookie('visits', visits)
 
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
@@ -156,6 +133,10 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
         
     request.session['visits'] = visits
+
+
+
+#Unwanted codes
 '''
 def register(request):
 
@@ -191,4 +172,31 @@ def register(request):
                   context = {'user_form': user_form,
                              'profile_form': profile_form,
                              'registered': registered})
+'''
+
+'''
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+
+                login(request, user)
+                return redirect(reverse('festival:index'))
+            else:
+                return HttpResponse("Your shareStory account is disabled.")
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'festival/Login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('festival:index'))
 '''
