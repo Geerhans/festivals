@@ -2,7 +2,7 @@
     {%load staticfiles %}
 
     {% block title_block %}
-        Login
+        FestivalHistory
     {% endblock %}
 
     {% block body_block %}
@@ -12,7 +12,11 @@
                     <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
                     <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
                     <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                    {% if user.is_authenticated %} 
+                    <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                    {% else %}
                     <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                    {% endif %}
                 </ul>  
                
         </div>
@@ -21,6 +25,10 @@
             {% if festival %}
                 <textarea id="mcontent" onfocus="setcolor(id)" onblur="savecolor(id)">{{festival.body}}
                 </textarea>
+
+                <div>
+                    <a href="{% url 'festival:view_shareStory' festival.slug %}">{{festival.festivalname}}</a>
+                </div>
 
             {% else %}
             The specified festival does not exist.

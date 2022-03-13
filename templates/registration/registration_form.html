@@ -1,12 +1,45 @@
 {% extends 'festival/base.html' %}
+{%load staticfiles %}
     {% block title_block %}
         Register
     {% endblock %}
     {% block body_block %}
-    <h1>Register Here</h1>
-    <form method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p }}
-    <input type="submit" value="Register" /> 
-    </form>
+    <div id="container">
+        
+        <div id="header">
+            <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of header" />
+        </div>
+        
+        <div class="navigation">
+                <ul class="nav">
+                    <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
+                    <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                    <li ><a href="{% url 'festival:about' %}">About</a></li> 
+                </ul>  
+        </div>
+        
+        <div id="main">
+            <div id="main_registration">
+                <h1>Register Here</h1>
+            <form method="post" action=".">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <input type="submit" value="Register" /> 
+            </form>
+            </div>
+            
+        </div>
+        
+        <div id="footer">
+
+            <div class="navigation">
+                <ul>
+                <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+
+        </div>
+    
+    </div>
+   
     {% endblock %}
