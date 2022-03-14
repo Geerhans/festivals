@@ -13,14 +13,18 @@
     
     <div id="container">
         
-        <div id="header"> <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of Festival" /></div>
+        <div id="header"> <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of header" /></div>
         
         <div class="navigation">
                 <ul class="nav">
                     <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
                     <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
                     <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                    {% if user.is_authenticated %} 
+                    <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                    {% else %}
                     <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                    {% endif %}
                 </ul>  
         </div> 
         
@@ -45,9 +49,9 @@
                         <ul class="country">
                             {% for festival in festivals %}
                             <li>
-                                <div id="main_country">
+                                <div id="main_festival">
                                     <ul>
-                                        <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Rango" /></li>
+                                        <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Festival" /></li>
                                         <li><a href="{% url 'festival:view_festivalHistory' festival.slug %}">{{festival.festivalname}}</a></li>
                                     </ul>
                                 </div>
@@ -55,7 +59,7 @@
                             {% endfor %}
                         </ul>
                         {% else %}
-                        <strong>No pages currently in category.</strong>>
+                        <strong>No festivals currently in country.</strong>>
                         {% endif %}
                     {% else %}
                         The specified country does not exist.

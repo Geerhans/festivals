@@ -46,18 +46,22 @@ def view_festivalHistory(request,festival_name_slug):
 
 @login_required
 
+
 def view_shareStory(request,id):
+
     # 1. View the festival stories of the selected festival posted by other users 
 
     context_dict = {}
     try: 
        # festival = Festival.objects.get(festivalSlug=festival_name_slug)
+
         festival = Festival.objects.get(id=id)
         stories = Story.objects.filter(festival=id)
      #   comment = Comment.objects.filter(festival)
         context_dict['festival'] = festival
         context_dict['stories'] = stories
      #   context_dict['comments'] = comment
+
     except Festival.DoesNotExist:
         context_dict['stories'] = None
         context_dict['comments'] = None
