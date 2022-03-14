@@ -12,7 +12,9 @@
                     <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
                     <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
                     <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                    <li ><a href="{% url 'festival:view_shareStory' festival.id%}">view_shareStory</a></li>
                     <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+
                 </ul>  
                
         </div>

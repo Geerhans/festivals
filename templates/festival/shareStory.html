@@ -19,6 +19,52 @@
             <div><img class="bg3" src="{% static 'images/Army Day.jpg' %}"alt="Picture of Army Day" /></div>
             <textarea id="mcontent2" onfocus="setcolor(id)" onblur="savecolor(id)">
             </textarea>
+            <div>
+                {% for story in stories %}
+                    <hr>
+                    <p>
+                        <strong style="color: pink">
+                            {{ story.user }}
+                        </strong>at
+                        <span style="color: green">
+                            {{ story.created|date:"Y-m-d H:i:s" }}
+                        </span>says:
+                    </p >
+                    <pre style="font-family: inherit; font-size: 1em;white-space: pre-wrap;word-wrap: break-word;">        {{ story.body }}
+                    </pre>
+                {% endfor %}
+            </div>
+            <hr>
+            {% if user.is_authenticated %}
+                
+                <div>
+                    
+                    <form action="{% url 'story:post_story' festival.id %}" method="post">
+                        
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="body">
+                                <strong>
+                                    Say something:
+                                </strong>
+                            </label>
+                            <textarea type="text" class="form-control" id="body" name="body" rows="2"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </form>
+                    
+                </div>
+                <br>
+                
+            {% else %}
+                    <br>
+                <h5 class="row justify-content-center">
+                    Please reply after<a href="{% url 'auth_login' %}">login</a >
+                </h5>
+                <br>
+                
+            {% endif%}
+
         </div>
         
         <div id="footer">

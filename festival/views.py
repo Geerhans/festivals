@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
-from festival.models import Country, Festival, Story, Comment
+from festival.models import Country, Festival
 from datetime import datetime
 from festival.forms import UserForm, UserProfileForm
 from django.http import HttpResponse
-
+from story.models import Story
 from django.contrib.auth.decorators import login_required
 
 
@@ -46,17 +46,18 @@ def view_festivalHistory(request,festival_name_slug):
 
 @login_required
 
-def view_shareStory(request):
+def view_shareStory(request,id):
     # 1. View the festival stories of the selected festival posted by other users 
 
     context_dict = {}
     try: 
        # festival = Festival.objects.get(festivalSlug=festival_name_slug)
-        festival = Festival.objects.get(festival)
-        story = Story.objects.filter(festival)
-        comment = Comment.objects.filter(festival)
-        context_dict['stories'] = story
-        context_dict['comments'] = comment
+        festival = Festival.objects.get(id=id)
+        stories = Story.objects.filter(festival=id)
+     #   comment = Comment.objects.filter(festival)
+        context_dict['festival'] = festival
+        context_dict['stories'] = stories
+     #   context_dict['comments'] = comment
     except Festival.DoesNotExist:
         context_dict['stories'] = None
         context_dict['comments'] = None

@@ -27,4 +27,5 @@ urlpatterns = [
     path('festival/',include('festival.urls', namespace='festival')),
     path('', views.index, name='index'),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('story/', include('story.urls', namespace='story')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
