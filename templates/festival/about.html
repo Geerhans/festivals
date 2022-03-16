@@ -6,9 +6,74 @@
     {% endblock %} 
 
     {% block body_block %}
+    <div id="container">
         
-        <h1>Festivals says...</h1>
-        <div>
-            about!
+        <div id="header"> <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of header" /></div>
+        
+        <div class="navigation">
+                <ul class="nav">
+                    <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                    <li ><a href="{% url 'festival:index' %}">Home</a></li>
+                    <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                    <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
+                    {% if user.is_authenticated %} 
+                    <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                    {% else %}
+                    <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                    {% endif %}
+                </ul>  
+        </div> 
+        
+        <div id="aboutMain">
+        <h1>About</h1>
+
+        <section style="background-color:bisque";>
+            <h2>Explore, Enjoy and Experience through ShareFestival</h2>
+        <p>
+            ShareFestival features an festival guide for everything you need to know about an exiciting festival in different countries. It is a 
+            platform to expose users to different festivals around the world and to share their thoughts and experiences. A way to celebrate our 
+            experiences together.
+            Beginning with a list of countries to choose from, the website navigates you to the interesting history of the fetsival, 
+            then an opportunity to share your experience.
+        </p>
+        </section>
+
+        <section style="background-color:rgb(238, 176, 101)";>
+        <h2>Mission</h2> 
+        <p>
+          Add mission
+        </p>
+        </section>
+
+        <section style="background-color:bisque"; >
+        <h2>Vision</h2> 
+        <p>
+            The vision of ShareFestival is to celebrate and promote traditional festivals around the world. 
+            Lets make our forgotten histories the future!
+        </p>
+        </section>
+
+        <section style="background-color:rgb(238, 176, 101)";>
+        <h2>Milestone</h2> 
+        <p>
+            ShareFestival was launched by 5 masters students from University of Glasgow. Building on an existing design activity, 
+            their concept was to create a website to promote the each country's creativity and tradition through their festivals.
+
+        </p>
+        </section>
+
         </div>  
+    </div>
+
+    <div id="footer">
+
+        
+            <div class="navigation" style="text-align: center;">
+              <a href="{% url 'festival:contact' %}">Contact us</a> -  © 2022 shareFestival - Cookies & Privacy - Feedback 
+            </div>
+            
+
+    </div>
+
+    </div>
     {% endblock %}

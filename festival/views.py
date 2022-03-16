@@ -71,7 +71,7 @@ def about(request):
     context_dict['visits'] = request.session['visits']
     return render(request, 'festival/about.html', context=context_dict)
 
-def contactUs(request):
+def contact(request):
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']

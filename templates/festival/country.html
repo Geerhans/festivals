@@ -16,33 +16,23 @@
         <div id="header"> <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of header" /></div>
         
         <div class="navigation">
-                <ul class="nav">
-                    <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
-                    <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
-                    <li ><a href="{% url 'festival:about' %}">About</a></li>  
-                    {% if user.is_authenticated %} 
-                    <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
-                    {% else %}
-                    <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
-                    {% endif %}
-                </ul>  
+            <ul class="nav">
+                <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                <li ><a href="{% url 'festival:index' %}">Home</a></li>
+                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
+                {% if user.is_authenticated %} 
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                {% else %}
+                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                {% endif %}
+            </ul>  
         </div> 
+
+        <h1 style="text-align:center">{{country.countryname}}</h1>
         
         <div id="main">
-                <div>
-                    {% if countries %}
-                    <ul class="country">
-                        <li class="GroupCategory" >Select Country</li>
-                        <li class="CountryCategory" >Most Popular</li>
-                        {% for country in countries %}
-                        <li><a href="{% url 'festival:view_country' country.slug %}">{{country.countryname}}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% else %}
-                    <strong>There are no countries present.</strong>
-                    {% endif %}
-                </div>
-
+               
                 <div>
                     {% if country %}
                         {% if festivals %}
@@ -50,10 +40,9 @@
                             {% for festival in festivals %}
                             <li>
                                 <div id="main_festival">
-                                    <ul>
-                                        <li><img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Festival" /></li>
-                                        <li><a href="{% url 'festival:view_festivalHistory' festival.slug %}">{{festival.festivalname}}</a></li>
-                                    </ul>
+                                    <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Festival" />
+                                    <a href="{% url 'festival:view_festivalHistory' festival.slug %}">{{festival.festivalname}}</a>
+                                    
                                 </div>
                             </li>
                             {% endfor %}
@@ -70,10 +59,8 @@
         
         <div id="footer">
 
-            <div class="navigation">
-                <ul>
-                <li><a href="{% url 'festival:contactUs' %}">Contact us</a></li>
-                </ul>
+            <div class="navigation" style="text-align: center;">
+                © 2022 shareFestival - Cookies & Privacy - Feedback
             </div>
 
         </div>
