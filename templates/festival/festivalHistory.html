@@ -28,15 +28,15 @@
         <div id="main1">
             
             {% if festival %}
-            <h1> {{festival.festivalname}}</h1>
+            <h1 style="text-align:center"> {{festival.festivalname}}</h1>
                 <textarea id="historycontent" onfocus="setcolor(id)" onblur="savecolor(id)" style="text-align:center">{{festival.body}}
 
                 </textarea>
                      
                 <div>
                     {% if country %}
-                    <a id="goback" href="{% url 'festival:view_country' country.slug %}">Click to go back</a>
-                    <a id="gonext" href="{% url 'festival:view_shareStory' festival.id %}">Click to share your story</a>
+                    <a id="goback" href="{% url 'festival:view_country' country.slug %}">Go Back</a>
+                    <a id="gonext" href="{% url 'festival:view_shareStory' festival.id %}">Share Your Story</a>
                     {% else %}
                     The specified country does not exist.
                     {% endif %}
