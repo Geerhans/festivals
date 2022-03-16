@@ -3,8 +3,36 @@
         Logged Out
     {% endblock %}
     {% block body_block %}
-    <h1>Logged Out</h1> 
-    <p>
-        You have been successfully logged out. Thanks for spending time on shareFestival! 
-    </p>
+    <div id="container">
+        
+        <div id="header">
+            <img class="header" src="{% static 'images/Index.png' %}" alt="Picture of header" />
+        </div>
+        
+        <div class="navigation">
+            <ul class="nav">
+                <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                <li ><a href="{% url 'festival:index' %}">Home</a></li>
+                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
+                {% if user.is_authenticated %} 
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                {% else %}
+                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                {% endif %}
+            </ul>  
+        </div> 
+
+        <h1>Logged Out</h1>
+        <p>
+            You have been successfully logged out. Thanks for spending time on Rango!
+        </p>
+
+
+        <div id="footer">
+            <div class="navigation" style="text-align: center;">
+                © 2022 shareFestival - Cookies & Privacy - Feedback
+            </div>
+        </div>
+
     {% endblock %}
