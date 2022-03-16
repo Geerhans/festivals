@@ -11,38 +11,45 @@
         </div>
         
         <div class="navigation">
-                <ul class="nav">
-                    <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
-                    <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
-                    <li ><a href="{% url 'festival:about' %}">About</a></li> 
-                </ul>  
-        </div>
+            <ul class="nav">
+                <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                <li ><a href="{% url 'festival:index' %}">Home</a></li>
+                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
+                {% if user.is_authenticated %} 
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                {% else %}
+                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                {% endif %}
+            </ul>  
+        </div> 
         
-        <div id="main">
+         
+        <section>
+            <div id="login">
+            <h1>Login</h1>
+
             <form method="post" action=".">
                 {% csrf_token %}
-                <div class="loginFirst" >Username: <input type="text" name="username" value="" size="50" /></div><br />
-                <div class="loginfollow" >Password: <input type="password" name="password" value="" size="50" /></div><br />
-                <div class="loginbutton"><input type="submit" value="Log In" /></div>
-                <input type="hidden" name="next" value="{{ next }}" /> 
+            Username: <input type="text" name="username" value="" size="50" /> </br> </br>
+            Password: <input type="password" name="password" value="" size="50" /> </br> </br>
+            <input type="submit" value="Log In" /> </br> </br>
+            <input type="hidden" name="next" value="{{ next }}" /> 
             </form>
-            <p>
-            <div class="logintipForget"><u>Forgot Password?</u></div>
-            <div><hr width='15%'></div>
-            <div class="logintipSignup">Not got an account? <a href="{% url 'registration_register' %}">Register here!</a></div>
-            </p>
 
-           
-        </div>
+            
+            Forgot Password?
+            <div><hr width='15%'></div></br>
+            Not got an account? <a href="{% url 'registration_register' %}">Register here!</a>
+            
+
+            </div>
+        </section>
         
         <div id="footer">
-
-            <div class="navigation">
-                <ul>
-                <li><a href="#">Contact Us</a></li>
-                </ul>
+            <div class="navigation" style="text-align: center;">
+                © 2022 shareFestival - Cookies & Privacy - Feedback
             </div>
-
         </div>
     
     </div>

@@ -8,12 +8,18 @@
     {% block body_block %}
     <div id="container">
         <div class="navigation">
-                <ul class="nav">
-                    <li ><a href="#">ShareFestival</a></li>
-                    <li ><a href="#">Personal Center</a></li>
-                    <li ><a href="#">About</a></li>  
-                </ul>  
-        </div>
+            <ul class="nav">
+                <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                <li ><a href="{% url 'festival:index' %}">Home</a></li>
+                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
+                {% if user.is_authenticated %} 
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                {% else %}
+                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                {% endif %}
+            </ul>  
+        </div> 
         
         <div id="main1">
             <div><img class="bg3" src="{% static 'images/Army Day.jpg' %}"alt="Picture of Army Day" /></div>
@@ -68,10 +74,8 @@
         </div>
         
         <div id="footer">
-            <div class="navigation">
-                <ul>
-                <li><a href="#">Contact us</a></li>
-                </ul>
+            <div class="navigation" style="text-align: center;">
+                © 2022 shareFestival - Cookies & Privacy - Feedback
             </div>
         </div>
     

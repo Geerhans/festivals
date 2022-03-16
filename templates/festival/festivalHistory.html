@@ -8,26 +8,29 @@
     {% block body_block %}
     <div id="container">
         <div class="navigation">
-                <ul class="nav">
-                    <li ><a href="{% url 'festival:index' %}">ShareFestival</a></li>
-                    <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
-                    <li ><a href="{% url 'festival:about' %}">About</a></li>  
-
-                    {% if user.is_authenticated %} 
-                    <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
-                    {% else %}
-                    <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
-                    {% endif %}
-
-                </ul>  
+            <ul class="nav">
+                <li ><a href="{% url 'festival:about' %}">About</a></li>  
+                <li ><a href="{% url 'festival:index' %}">Home</a></li>
+                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
+                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
+                {% if user.is_authenticated %} 
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                {% else %}
+                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                {% endif %}
+            </ul>  
+        </div> 
                
-        </div>
-        
-        <div id="main2">
-            <div id="main3"> {% if festival %}
-                <textarea id="mcontent" onfocus="setcolor(id)" onblur="savecolor(id)">{{festival.body}}
-                </textarea>
 
+        
+        <div id="main1">
+            
+            {% if festival %}
+            <h1> {{festival.festivalname}}</h1>
+                <textarea id="historycontent" onfocus="setcolor(id)" onblur="savecolor(id)" style="text-align:center">{{festival.body}}
+
+                </textarea>
+                     
                 <div>
                     {% if country %}
                     <a id="goback" href="{% url 'festival:view_country' country.slug %}">Click to go back</a>
@@ -36,6 +39,7 @@
                     The specified country does not exist.
                     {% endif %}
                 </div>
+                 
 
             {% else %}
             The specified festival does not exist.
@@ -44,10 +48,8 @@
         </div>
         
         <div id="footer">
-            <div class="navigation">
-                <ul>
-                <li><a href="#">Contact us</a></li>
-                </ul>
+            <div class="navigation" style="text-align: center;">
+                © 2022 shareFestival - Cookies & Privacy - Feedback
             </div>
         </div>
     
