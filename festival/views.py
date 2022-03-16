@@ -31,14 +31,14 @@ def view_festivalHistory(request,festival_name_slug):
     # 1. lists the festivals of a particular country
     try:
         festival = Festival.objects.get(slug=festival_name_slug)
-        
+        country=Country.objects.get(countryname=festival.countryname)
 
         context_dict = {}
         context_dict['festival'] = festival
-        
+        context_dict['country'] = country
     except Country.DoesNotExist:
         context_dict['festival'] = None
-
+        context_dict['country'] =None
 
     visitor_cookie_handler(request)
     return render(request, 'festival/festivalHistory.html', context=context_dict)

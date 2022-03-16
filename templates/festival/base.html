@@ -53,8 +53,40 @@
 
         #main1{
 
-        height: 850px;
+        height: 750px;
         background: rgb(255, 255, 255);
+        }
+
+        #main2{
+            height: 850px;
+            background-image: url(D:/UofG/IT/historybackgroud.jpg);
+            background-color: #ffffff;
+            background-repeat: no-repeat, no-repeat;
+            background-position: right, left; 
+
+        }
+
+        #main3{
+            
+            height: 850px;
+            background-image: url(D:/UofG/IT/historybackgroud.jpg);
+            background-color: #ffdb11;
+            background-repeat: no-repeat, no-repeat;
+            background-position: right, left; 
+            
+        }
+
+        #main_personnalcenter1{
+            height: 850px;
+            width: 400px;
+            background-color: #2299ff;
+        }
+
+        #main_personnalcenter2{
+            height: 850px;
+            width: 800px;
+            background-color: #68ff22;
+            margin-left:10%; 
         }
 
         #main_festival{
@@ -106,9 +138,9 @@
             
         }
 
-        ul.nav.li a:hover{
+        ul.nav>li a:hover{
             /* The background turns black when the mouse is selected */
-            background-color: rgb(253, 4, 4);
+            background-color: rgb(253, 4, 170);
         }
 
 
@@ -121,6 +153,24 @@
         margin-left: 10%;
         padding: 0;
         }
+
+        ul.personnalcenter{
+        /* clear the default style of the ul tag */
+        width: auto;/* width is also changed to auto */
+        list-style-type: none;
+        white-space:nowrap;
+        overflow: hidden;
+        margin-left: 8%;
+        padding: 0;
+        }
+
+        ul.personnalcenter>li{
+            float:left; /* Make the li content float horizontally, that is, arrange it horizontally */
+            margin-right:2%;  /* distance between two li */
+            position: relative;
+            overflow: hidden;
+        }
+
 
         ul.country>li {
             float:left; /* Make the li content float horizontally, that is, arrange it horizontally */
@@ -328,10 +378,17 @@
         height: 50%;
         line-height: 1.5;
         }
+
+        a#goback{
+            padding-left:130px;
+        }
+        a#gonext{
+            padding-left:1100px;
+        }
         </style>
     </head>
 
-    <body>
+    <body background="static/images/HisBackground.jpg">
         <div>
             {% block body_block %}
             {% endblock %}

@@ -23,18 +23,24 @@
                
         </div>
         
-        <div id="main1">
-            {% if festival %}
+        <div id="main2">
+            <div id="main3"> {% if festival %}
                 <textarea id="mcontent" onfocus="setcolor(id)" onblur="savecolor(id)">{{festival.body}}
                 </textarea>
 
                 <div>
-                    <a href="{% url 'festival:view_shareStory' festival.slug %}">{{festival.festivalname}}</a>
+                    {% if country %}
+                    <a id="goback" href="{% url 'festival:view_country' country.slug %}">Click to go back</a>
+                    <a id="gonext" href="{% url 'festival:view_shareStory' festival.id %}">Click to share your story</a>
+                    {% else %}
+                    The specified country does not exist.
+                    {% endif %}
                 </div>
 
             {% else %}
             The specified festival does not exist.
-            {% endif %}
+            {% endif %} </div>
+           
         </div>
         
         <div id="footer">
