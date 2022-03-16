@@ -1,11 +1,6 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect
-from django.urls import reverse
 from festival.models import Country, Festival
 from datetime import datetime
-from festival.forms import UserForm, UserProfileForm
-from django.http import HttpResponse
 from story.models import Story
 from django.contrib.auth.decorators import login_required
 
@@ -45,8 +40,6 @@ def view_festivalHistory(request,festival_name_slug):
 
 
 @login_required
-
-
 def view_shareStory(request,id):
 
     # 1. View the festival stories of the selected festival posted by other users 
