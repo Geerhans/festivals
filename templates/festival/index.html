@@ -35,9 +35,9 @@
                         <ul class="country">
                             {% for country in countries %}
                             <li>
-                                <div id="main_country">
+                                <div id="main_country" autocapitalize="words">
                                         <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Country" />
-                                        <a href="{% url 'festival:view_country' country.slug %}">{{country.countryname}}</a>
+                                        <a href="{% url 'festival:view_country' country.slug %}">{{country.countryname|upper}}</a>
                                 </div>
                             </li>
                             {% endfor %}
