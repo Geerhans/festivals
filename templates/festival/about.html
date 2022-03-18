@@ -17,9 +17,9 @@
                     <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
                     <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
                     {% if user.is_authenticated %} 
-                    <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                    <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d">Logout</a>
                     {% else %}
-                    <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                    <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
                     {% endif %}
                 </ul>  
         </div> 
@@ -27,7 +27,7 @@
         <div id="aboutMain">
         <h1>About</h1>
 
-        <section style="background-color:bisque";>
+        <section id="aboutSection1">
             <h2>Explore, Enjoy and Experience through ShareFestival</h2>
         <p>
             ShareFestival features an festival guide for everything you need to know about an exiciting festival in different countries. It is a 
@@ -38,14 +38,14 @@
         </p>
         </section>
 
-        <section style="background-color:rgb(238, 176, 101)";>
+        <section id="aboutSection2";>
         <h2>Mission</h2> 
         <p>
          Our mission is to become an inspiration and essential to our users to learn and share about their favourite festivals.
         </p>
         </section>
 
-        <section style="background-color:bisque"; >
+        <section id="aboutSection1">
         <h2>Vision</h2> 
         <p>
             Our vision is to celebrate and promote traditional festivals around the world. 
@@ -53,7 +53,7 @@
         </p>
         </section>
 
-        <section style="background-color:rgb(238, 176, 101)";>
+        <section id="aboutSection2";>
         <h2>Milestone</h2> 
         <p>
             ShareFestival was launched in 2022 by 5 masters students from the University of Glasgow. Building on an existing design activity, 
@@ -67,14 +67,8 @@
         </div>  
     </div>
 
-    <div id="footer">
-
-        
-            <div class="navigation" style="text-align: center;">
-              <a href="{% url 'festival:contact' %}">Contact us</a> -  © 2022 shareFestival - Cookies & Privacy - Feedback 
-            </div>
-            
-
+    <div id="footer2">
+        <a href="{% url 'festival:contact' %}">Contact us</a> -  © 2022 shareFestival - Cookies & Privacy - Feedback 
     </div>
 
     </div>

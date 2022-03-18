@@ -22,14 +22,14 @@
                 <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
                 <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
                 {% if user.is_authenticated %} 
-                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d">Logout</a>
                 {% else %}
-                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
                 {% endif %}
             </ul>  
         </div> 
 
-        <h1 style="text-align:center">{{country.countryname|upper}}</h1>
+        <h1 id="h1">{{country.countryname|upper}}</h1>
         
         <div id="main">
                
@@ -57,12 +57,8 @@
             
         </div>
         
-        <div id="footer">
-
-            <div class="navigation" style="text-align: center;">
+        <div id="footer2">
                 © 2022 shareFestival - Cookies & Privacy - Feedback
-            </div>
-
         </div>
     
     </div>

@@ -17,9 +17,9 @@
                 <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
                 <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
                 {% if user.is_authenticated %} 
-                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d">Logout</a>
                 {% else %}
-                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
                 {% endif %}
             </ul>  
         </div> 
@@ -36,20 +36,15 @@
             <input type="submit" value="Log In" /> </br> </br>
             <input type="hidden" name="next" value="{{ next }}" /> 
             </form>
-
             
             Forgot Password?
             <div><hr width='15%'></div></br>
             Not got an account? <a href="{% url 'registration_register' %}">Register here!</a>
-            
-
             </div>
         </section>
         
-        <div id="footer">
-            <div class="navigation" style="text-align: center;">
-                © 2022 shareFestival - Cookies & Privacy - Feedback
-            </div>
+        <div id="footer2">
+            © 2022 shareFestival - Cookies & Privacy - Feedback
         </div>
     
     </div>
