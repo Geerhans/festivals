@@ -30,7 +30,6 @@ class Festival(models.Model):
     countryname = models.ForeignKey(Country, on_delete=models.CASCADE)
     festivalname = models.CharField(max_length=128)
     body = models.TextField()
-    #image = models.ImageField()
     views = models.IntegerField(default=0)
     slug = models.SlugField(blank=True)
     image_url=models.URLField(max_length=200,default="spring.jpg")
@@ -63,8 +62,6 @@ class Story(models.Model):
 class Comment(models.Model):
     commentID = models.IntegerField(unique=True)
     StoryID = models.ForeignKey(Story, on_delete=models.CASCADE)
-  #  userID = models.ForeignKey(User)
-# need a user foreignkey
     commentMessage = models.TextField()
     datePosted = models.DateTimeField(auto_now=True)
 
@@ -77,7 +74,6 @@ class Comment(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     def __str__(self):
         return self.user.username
