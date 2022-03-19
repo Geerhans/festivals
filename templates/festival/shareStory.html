@@ -15,32 +15,36 @@
                 <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
                 <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
                 {% if user.is_authenticated %} 
-                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
+                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d">Logout</a>
                 {% else %}
-                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
+                <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
                 {% endif %}
             </ul>  
         </div> 
-        
-        <div id="main1">
-            <div id="sharesotry_body">
+    
+        {% if festival %}
+            <h1 id="h1"> ShareStory - {{festival.festivalname}}</h1>
+        {% endif %}
+            
                 {% for story in stories %}
                     <hr>
-                    <div id="sharesotry_story">
+                    <div id="container1">
                         <p>
-                            <strong style="color: pink">
-                                {{ story.user }}
-                            </strong>at
-                            <span style="color: #4CAF50">
-                                {{ story.created|date:"Y-m-d H:i:s" }}
-                            </span>says:
+                            <strong id="userName"> 
+                                <img id="img" src="{% static 'images/user.png' %}"alt="Avatar" />
+                                {{ story.user|upper }} 
+                            </strong></br>
+                            <strong id="msg">
+                                {{ story.created|date:"d-m-Y H:i" }}
+                            </strong>
                         </p >
-                        <pre style="font-family: inherit; font-size: 1em;white-space: pre-wrap;word-wrap: break-word;">        {{ story.body }}
-                        </pre>
+                        <div id="msg2">
+                          {{ story.body }}
+                        </div>
                     </div>
                     
                 {% endfor %}
-            </div>
+          
             <hr>
             {% if user.is_authenticated %}
                 
@@ -49,21 +53,17 @@
                     <form action="{% url 'story:post_story' festival.id %}" method="post">
                         
                         {% csrf_token %}
-                        <div  id="sharesotry_share">
+                    
+                        <div  id="container2">
                             <div class="form-group">
-                                <label for="body">
-                                    <strong>
-                                        <p class="share">Say something:</p>
-                                    </strong>
-                                </label>
                                 <div>
-                                    <textarea type="text" style="border:0;border-radius:5px;background-color:rgba(255, 255, 255, 0.98);width: 650px;height: 100px;padding: 10px;resize: none;margin-left:5%;" id="body" name="body" rows="2"
-                                   ></textarea>
-                                </div>
+                                    <textarea type="text"  id="txtArea" name="body" rows="2"
+                                  placeholder="Share your story" ></textarea>
+                                  </div>
                             </div>
-                            <button class="submit" type="submit">Post</button>
+                            <button id="btn" type="submit">Post</button>
                         </div>
-                        
+                    
                     </form>
                     
                 </div>

@@ -49,18 +49,11 @@ class Festival(models.Model):
 
 class Story(models.Model):
     storyID = models.IntegerField(unique=True)
-    
     festivalID = models.ForeignKey(Festival, on_delete=models.CASCADE)
- #   userID = models.ForeignKey(User)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     storyMessage = models.TextField()
     datePosted = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(default=0)
-   # slug = models.SlugField()
-   # def save(self, *args, **kwargs):
-   #     self.slug = slugify(self.countryname) 
-   #     super(Country, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ('datePosted',)

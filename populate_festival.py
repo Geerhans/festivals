@@ -67,7 +67,7 @@ def populate():
 
     uk_festivals = [
         {"festivalname":"Burns Night","body":
-        "Celebrated on: 35 January.\n""\n"
+        "Celebrated on: 15 January.\n""\n"
         "Festival history:\n""\n"
         "Burns Night is annually celebrated in Scotland on or around January 25. It commemorates the life of the bard (poet) Robert Burns, who was born on January 25, 1759. The day also celebrates Burns' contribution to Scottish culture. His best known work is Auld Lang Syne.\n""\n"
         "Main attraction:\n""\n"

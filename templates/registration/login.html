@@ -37,7 +37,7 @@
             <input type="hidden" name="next" value="{{ next }}" /> 
             </form>
             
-            Forgot Password?
+            <a href="{% url 'auth_password_reset' %}">Forgot Password? </a>
             <div><hr width='15%'></div></br>
             Not got an account? <a href="{% url 'registration_register' %}">Register here!</a>
             </div>
