@@ -2,7 +2,7 @@
     {%load staticfiles %}
 
     {% block title_block %}
-        Profile for {{ selected_user.username }}
+        Profile for {{ user.username }}
     {% endblock %}
 
     {% block body_block %}
@@ -24,32 +24,32 @@
             </ul>  
         </div> 
         
-        <div id="main1">
-            <div class="jumbotron p-4">
-                <div class="container">
-                <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
+        <div id="body_personnalcenter">
+            <h1 class="jumbotron-heading">{{ user.username }}'s Profile</h1>
+            <div id="main_personnalcenter1">
+                <div><img class="profile" src="{% static 'images/profile.png' %}" alt="Picture of profile" /></div>
+                <p>{{user.username}}</p>
+            </div>
+
+            <div id="main_personnalcenter2">
+                <div id="personnalcenter_information">
+                    <h2>Account Information</h2>
+                    <p>Name:                 {{user.username}}</p>
+                    <p>Email:                {{user.email}}</p>
                 </div>
 
+                <div id="personnalcenter_information">
+                    <h2>Change Password</h2>
+                    <p>Current Password:                 *************</p>
+                    <p>New Password:                *************</p>
                 </div>
-                <div class="container">
-                    <div class="row">
-                        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="300" height="300" alt="{{ selected_user.username }}'s profile image" />
-                <br />
+
                 <div>
-                {% if selected_user == user %}
-                <form method="post" action="." enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Update" />
-                </form>
-                {% else %}
-                <p><strong>Website:</strong>
-                    <a href="{{ user_profile.website }}">{{ user_profile.website }}</a>
-                    </p>
-                    {% endif %}
-                    </div>
-                    </div>
-                    </div>
+                    <button class="personalcenter" type="submit">Update Profile</button>
+                    <button class="personalcenter" type="submit">Delete Account</button>
+                </div>
+            </div>
+
         </div>
         <div id="footer2">
             © 2022 shareFestival - Cookies & Privacy - Feedback
