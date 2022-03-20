@@ -6,6 +6,8 @@ from django.urls import reverse
 from festival.models import Festival
 from story.forms import StoryForm
 
+#When we receive the transmitted festival_id, enter it into this 
+# function to get the corresponding festival.
 
 @login_required #(login_url='/userprofile/login/')
 def post_story(request, festival_id):
@@ -19,6 +21,7 @@ def post_story(request, festival_id):
     #    return redirect('/festival/')
 
     # POST
+    #Save the entered story form. Also information about festivals and users
     if request.method == 'POST':
         story_form = StoryForm(request.POST)
         if story_form.is_valid():
