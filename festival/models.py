@@ -57,6 +57,32 @@ class Festival(models.Model):
 
 
 
+class Story(models.Model):
+    storyID = models.IntegerField(unique=True)
+    festivalID = models.ForeignKey(Festival, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    storyMessage = models.TextField()
+    datePosted = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('datePosted',)
+        verbose_name_plural = 'Stories'
+
+
+class Comment(models.Model):
+    commentID = models.IntegerField(unique=True)
+    StoryID = models.ForeignKey(Story, on_delete=models.CASCADE)
+    commentMessage = models.TextField()
+    datePosted = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('datePosted',)
+        verbose_name_plural = 'Comments'
+    def __str__(self):
+        return self.body[:20]
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='profile_images', blank=True)
