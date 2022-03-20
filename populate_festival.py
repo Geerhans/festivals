@@ -35,10 +35,10 @@ def populate():
         "festivalID":3,"image_url":"National Day.jpg"}]
 
     india_festivals = [
-        {"festivalname":"Holi","body":
-        "Celebrated on: Holi marks the arrival of spring and the end of winter. It is usually celebrated in March\n""\n"
-        "Festival history:\n""\n"
-        "Holi is a Hindu festival that celebrates spring, love, and new life. It is also known as Festival of colours. It is believed the Holi colours came from Krishna mischievously throwing coloured water over his milkmaids when he was a boy. This developed into the practical jokes and games of Holi.\n""\n"
+        {'festivalname':'Holi','body':
+        'Celebrated on: Holi marks the arrival of spring and the end of winter. It is usually celebrated in March\n''\n'
+        'Festival history:' '\r \n'
+        'Holi is a Hindu festival that celebrates spring, love, and new life. It is also known as Festival of colours. It is believed the Holi colours came from Krishna mischievously throwing coloured water over his milkmaids when he was a boy. This developed into the practical jokes and games of Holi.\n''\n'
         "Main attraction:\n""\n"
         "On the first night of Holi, people light bonfires and throw roasting grains, popcorn, coconut and chickpeas onto them. Following day, people of all ages go into the streets for fun and paint-throwing. Everyone gets involved!\n""\n"
         "Hindus have fun by smearing each other with paint and throwing coloured water.\n",
@@ -47,11 +47,18 @@ def populate():
         {"festivalname":"Diwali","body":
         "Celebrated on: Some time between October and November.\n""\n"
         "Festival history:\n""\n"
-        "Diwali is the five-day Festival of Lights, celebrated by millions of Hindus, Sikhs and Jains across the world. Diwali, which for some also coincides with harvest and new year celebrations, is a festival of new beginnings and the triumph of good over evil and light over darkness. Houses, shops and public places are decorated with small oil lamps called diyas. People also enjoy fireworks and sweets too, so it's really popular with children.\n""\n"
+        "Diwali is a celebration of lights and one of the most important Hindu, Jains, and Sikh festivals. The festival is held during the Hindu lunisolar month Kartika and normally lasts five days (between mid-October and mid-November). Diwali is one of Hinduism's most celebrated celebrations, representing the spiritual winning of light over darkness, good over evil, and knowledge over ignorance."
+        "The goddess of prosperity, Lakshmi, is frequently linked with the festival, as are Sita and Rama, Vishnu, Krishna, Yama, Yami, Durga, Kali, Hanuman, Ganesha, Kubera, Dhanvantari, or Vishvakarman, according to numerous regional traditions. In various parts of the world, it's also a commemoration of Rama's return to Ayodhya with his wife Sita and brother Lakshmana after defeating Ravana in Lanka and serving 14 years of exile.\n""\n"
+        
+        "The five-day celebration is said to have originated in India and is recorded in early Sanskrit scriptures. Diwali is traditionally celebrated twenty days after Vijayadashami (Dussehra, Dasara, Dasain), with Dhanteras, or the regional equivalent, marking the first day of the holiday, when celebrants clean their homes and make floor decorations like rangolis. Naraka Chaturdashi is the second day. The third day is Lakshmi Puja, which falls on the darkest night of the lunar month."
+        "The Govardhan Puja and Balipratipada are celebrated the day after Lakshmi Puja in several parts of India (Padwa). Some Hindu communities celebrate Bhai Dooj or its regional counterpart on the last day of the month, which honours the sister-brother bond, while others do not. Some Hindu communities celebrate Bhai Dooj or its regional equivalent on the last day of the month, which is devoted to the bond respectively sister and brother, while others, such as Hindu and Sikh craftsmen, celebrate Vishwakarma Puja by performing maintenance in their workspaces and offering prayers.\n""\n"
+        
         "Main attraction:\n""\n"
-        "Many lights and oil lamps are lit on the streets and in houses.\n""\n"
-        "Fireworks and festivities.\n""\n"
-        "Lakshmi, the Hindu goddess of wealth, is worshipped as the bringer of blessings for the new year.",
+        "The celebration takes place on a night when there is no moon. Firecrackers are lighted and lights are hung on the walls and doorways of houses to celebrate Diwali, which comes in the Hindu calendar month of Karthik and happens on an amavasya  (moonless night).\n""\n"
+        "It honors Lakshmi's birth as the goddess of wealth. On Diwali, Lakshmi, the goddess of wealth and prosperity, is said to have been born from the vast churning of the milk sea, known as Samudra Manthan.\n""\n"
+        "The harvest season has come to a close. Farmers in India offer their produce to goddess Lakshmi for prosperity in the month of Karthik, which marks the conclusion of harvest season.\n""\n"
+        "It contains the Annakut festival. Annakut is observed on the fourth day of Diwali, which is the first day of the Hindu calendar's new year. It's a day for thanking Krishna for his kindness by presenting heaps of food in the shape of Govardhan mountain.\n""\n"
+        "There are a lot of lights and fireworks. The party would not be complete without firecrackers and the use of lamps and candles. Electrical lights decorations have become a popular approach to create sophisticated decors over the years.",
         "festivalID":2,"image_url":"National Day.jpg"},
 
 
@@ -67,7 +74,7 @@ def populate():
 
     uk_festivals = [
         {"festivalname":"Burns Night","body":
-        "Celebrated on: 35 January.\n""\n"
+        "Celebrated on: 15 January.\n""\n"
         "Festival history:\n""\n"
         "Burns Night is annually celebrated in Scotland on or around January 25. It commemorates the life of the bard (poet) Robert Burns, who was born on January 25, 1759. The day also celebrates Burns' contribution to Scottish culture. His best known work is Auld Lang Syne.\n""\n"
         "Main attraction:\n""\n"

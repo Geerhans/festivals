@@ -8,53 +8,22 @@
     {% block body_block %}
 
     <div id="container">
-        <div id="header"> <img class="header" src="{% static 'images/bg.jpg' %}" alt="Picture of header" /></div>
-        
-        <div class="navigation">
-            <ul class="nav">
-                <li ><a href="{% url 'festival:about' %}">About</a></li>  
-                <li ><a href="{% url 'festival:index' %}">Home</a></li>
-                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
-                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
-                {% if user.is_authenticated %} 
-                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d" style="height: 30px">Logout</a>
-                {% else %}
-                <a href="{% url 'auth_login' %}" class="btn-3d" style="height: 30px">Login</a>
-                {% endif %}
-            </ul>  
-        </div> 
-        
         <div id="body_personnalcenter">
-            <h1 class="jumbotron-heading">{{ user.username }}'s Profile</h1>
-            <div id="main_personnalcenter1">
-                <div><img class="profile" src="{% static 'images/profile.png' %}" alt="Picture of profile" /></div>
-                <p>{{user.username}}</p>
-            </div>
+            <h1 id="h1">Profile Information</h1>
+            
 
-            <div id="main_personnalcenter2">
-                <div id="personnalcenter_information">
-                    <h2>Account Information</h2>
-                    <p>Name:                 {{user.username}}</p>
+            <div id="profilecontainer">
+                <img class="profile" src="{% static 'images/user.png' %}" alt="Picture of profile" />
+                
+                    <p>Username:             {{user.username}}</p>
                     <p>Email:                {{user.email}}</p>
-                </div>
 
-                <div id="personnalcenter_information">
-                    <h2>Change Password</h2>
-                    <p>Current Password:                 *************</p>
-                    <p>New Password:                *************</p>
-                </div>
+                    <div id="btn_pc">
+                     <a href="{% url 'auth_password_reset' %}"> <button type="submit" >Reset Password</button> </a>
+                    </div>
 
-                <div>
-                    <button class="personalcenter" type="submit">Update Profile</button>
-                    <button class="personalcenter" type="submit">Delete Account</button>
-                </div>
             </div>
-
         </div>
-        <div id="footer2">
-            © 2022 shareFestival - Cookies & Privacy - Feedback
-        </div>
-    
     </div>
         
     {% endblock %}

@@ -5,26 +5,6 @@
     {% endblock %}
     {% block body_block %}
     <div id="container">
-        
-        <div id="header">
-            <img class="header" src="{% static 'images/bg.jpg' %}" alt="Picture of header" />
-        </div>
-        
-        <div class="navigation">
-            <ul class="nav">
-                <li ><a href="{% url 'festival:about' %}">About</a></li>  
-                <li ><a href="{% url 'festival:index' %}">Home</a></li>
-                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
-                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
-                {% if user.is_authenticated %} 
-                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d">Logout</a>
-                {% else %}
-                <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
-                {% endif %}
-            </ul>  
-        </div> 
-        
-         
         <section>
             <div id="login">
             <h1>Login</h1>
@@ -37,16 +17,11 @@
             <input type="hidden" name="next" value="{{ next }}" /> 
             </form>
             
-            Forgot Password?
+            <a href="{% url 'auth_password_reset' %}">Forgot Password? </a>
             <div><hr width='15%'></div></br>
             Not got an account? <a href="{% url 'registration_register' %}">Register here!</a>
             </div>
         </section>
-        
-        <div id="footer2">
-            © 2022 shareFestival - Cookies & Privacy - Feedback
-        </div>
-    
     </div>
         
     {% endblock %}
