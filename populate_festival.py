@@ -136,6 +136,9 @@ def populate():
         "italy": {"festivals": italy_festivals,"countryID":5}}
 
  
+    #
+    #
+    #
     for cou,cou_data in countries.items():
         c = add_country(cou,cou_data["countryID"])
         for f in cou_data["festivals"]:
