@@ -7,22 +7,7 @@
 
     {% block body_block %}
     <div id="container">
-        <div id="header"> <img class="header" src="{% static 'images/bg.jpg' %}" alt="Picture of header" /></div>
-        <div class="navigation">
-            <ul class="nav">
-                <li ><a href="{% url 'festival:about' %}">About</a></li>  
-                <li ><a href="{% url 'festival:index' %}">Home</a></li>
-                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
-                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
-                {% if user.is_authenticated %} 
-                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d">Logout</a>
-                {% else %}
-                <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
-                {% endif %}
-            </ul>  
-        </div> 
-    
-        {% if festival %}
+    {% if festival %}
             <h1 id="h1"> ShareStory - {{festival.festivalname}}</h1>
         {% endif %}
             
@@ -77,11 +62,6 @@
             {% endif%}
 
         </div>
-        
-        <div id="footer2">
-            © 2022 shareFestival - Cookies & Privacy - Feedback
-        </div>
-    
     </div>
         
     {% endblock %}

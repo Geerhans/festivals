@@ -9,26 +9,10 @@
  
     <div id="container">
         
-        <div id="header">
-            <img class="header" src="{% static 'images/bg.jpg' %}" alt="Picture of header" />
-        </div>
-        
-        <div class="navigation">
-            <ul class="nav">
-                <li ><a href="{% url 'festival:about' %}">About</a></li>  
-                <li ><a href="{% url 'festival:index' %}">Home</a></li>
-                <li ><a href="{% url 'festival:personalCenter' %}">Personal Center</a></li>
-                <li ><a href="{% url 'festival:contact' %}">Contact Us</a></li>
-                {% if user.is_authenticated %} 
-                <a href="{% url 'auth_logout' %}?next={% url 'festival:index' %}" class="btn-3d">Logout</a>
-                {% else %}
-                <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
-                {% endif %}
-            </ul>  
-        </div>
+       
  
             
-         <h1 id="h1">ShareFestival</h1>
+        <h1 id="h1">ShareFestival</h1>
 
         <div id="main">
 
@@ -48,10 +32,6 @@
                     {% else %}
                     <strong>There are no countries present.</strong>
                     {% endif %} 
-        </div>
-        
-        <div id="footer2">
-            <a href="{% url 'festival:contact' %}">Contact us</a> -  © 2022 shareFestival - Cookies & Privacy - Feedback 
         </div>
     
         </div>
