@@ -11,9 +11,6 @@ urlpatterns = [
     path('festivalHistory/', views.view_festivalHistory, name='festivalHistory'),
     path('shareStory/<int:id>/', views.view_shareStory, name='view_shareStory'),
     path('personalCenter/', views.personalCenter, name='personalCenter'),
-   # path('logout/', views.user_logout, name='logout'),
-    #path('register/', views.register, name='register'),
-    #path('login/', views.user_login, name='login'),
     path('country/<slug:country_name_slug>/', views.view_country, name='view_country'),
 
 ]
