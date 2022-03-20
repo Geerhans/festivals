@@ -38,7 +38,7 @@
                             {% for country in countries %}
                             <li>
                                 <div id="main_country">
-                                        <img class="bg1" style="object-fit: contain;" src="{% static 'images/' %}{{country.countryname}}.jpg"alt="Picture of Country" />
+                                        <img class="bg1" src="{% static 'images/' %}{{country.countryname}}.jpg"alt="Picture of Country" />
                                         <a href="{% url 'festival:view_country' country.slug %}">{{country.countryname|upper}}</a>
                                 </div>
                             </li>

@@ -28,12 +28,13 @@
                 {% endif %}
             </ul>  
         </div> 
+        
         {% if countries %}
-        <select class="country_select" value={{country.countryname}} onchange="jump_to(this.options[this.options.selectedIndex].value)">
-            <option>{{country.countryname}}</option>
+        <select class="country_select" value={{country.countryname|upper}} onchange="jump_to(this.options[this.options.selectedIndex].value)">
+            <option>{{country.countryname|upper}}</option>
             {% for count in countries %}
             {% if count.countryname != country.countryname %}
-            <option>{{count.countryname}}</option>
+            <option>{{count.countryname|upper}}</option>
             {% endif %}
             {% endfor %}
         </select>
