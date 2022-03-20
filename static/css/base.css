@@ -441,7 +441,7 @@
     #txtArea{
     border-radius:5px;
     background-color:rgba(255, 255, 255, 0.98);
-    width: 1000px;
+    width: calc(100% - 46px);
     padding: 10px;
     margin-bottom: 2px;
     margin-left: 13px;
