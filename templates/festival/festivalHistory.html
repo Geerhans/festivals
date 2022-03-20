@@ -29,8 +29,7 @@
             
             {% if festival %}
             <h1 id="h1"> {{festival.festivalname}}</h1>
-                <textarea id="historycontent">{{festival.body}}</textarea>
-                     
+                <div style="white-space: pre-line; font-family: monospace; border: 1px solid black;" id="historycontent">{{festival.body}}</div>  
                 <div>
                     {% if country %}
                     <a id="goback" href="{% url 'festival:view_country' country.slug %}">Go Back</a>

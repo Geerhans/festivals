@@ -10,7 +10,7 @@
     {% endblock %} 
 
     {% block body_block %}
-    
+    <script type="text/javascript" src="{% static 'js/country.js' %}"></script>
     <div id="container">
         
         <div id="header"> <img class="header" src="{% static 'images/bg.jpg' %}" alt="Picture of header" /></div>
@@ -28,11 +28,20 @@
                 {% endif %}
             </ul>  
         </div> 
+        {% if countries %}
+        <select class="country_select" value={{country.countryname}} onchange="jump_to(this.options[this.options.selectedIndex].value)">
+            <option>{{country.countryname}}</option>
+            {% for count in countries %}
+            {% if count.countryname != country.countryname %}
+            <option>{{count.countryname}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        {% endif %} 
 
         <h1 id="h1">{{country.countryname|upper}}</h1>
         
         <div id="main">
-               
                 <div>
                     {% if country %}
                         {% if festivals %}
@@ -40,7 +49,7 @@
                             {% for festival in festivals %}
                             <li>
                                 <div id="main_festival">
-                                    <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Festival" />
+                                    <img class="bg1" style="object-fit: cover;" src="{% static 'images/' %}{{festival.countryname}}/{{festival.festivalname}}.jpg"alt="Picture of Festival" />
                                     <a href="{% url 'festival:view_festivalHistory' festival.slug %}">{{festival.festivalname}}</a>
                                     
                                 </div>
