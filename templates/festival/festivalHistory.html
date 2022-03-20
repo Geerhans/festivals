@@ -23,14 +23,14 @@
             </ul>  
         </div> 
                
-
         
-        <div id="main1">
             
             {% if festival %}
             <h1 id="h1"> {{festival.festivalname}}</h1>
-                <textarea id="historycontent">{{festival.body}}</textarea>
-                     
+              <div id="main1">  
+                  <p>{{festival.body|linebreaks}}</p>
+            
+            </div>
                 <div>
                     {% if country %}
                     <a id="goback" href="{% url 'festival:view_country' country.slug %}">Go Back</a>
@@ -43,7 +43,7 @@
 
             {% else %}
             The specified festival does not exist.
-            {% endif %} </div>
+            {% endif %} 
            
         </div>
         
