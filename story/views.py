@@ -9,19 +9,10 @@ from story.forms import StoryForm
 #When we receive the transmitted festival_id, enter it into this 
 # function to get the corresponding festival.
 
-@login_required #(login_url='/userprofile/login/')
+@login_required
 def post_story(request, festival_id):
-   # try:
-   #     festival = Festival.objects.get(id=festival_id) 
-   # except Festival.DoesNotExist:
-     #   festival = None
-    # You cannot add a page to a Category that does not exist...
     festival = get_object_or_404(Festival, id=festival_id)
-   # if festival is None:
-    #    return redirect('/festival/')
 
-    # POST
-    #Save the entered story form. Also information about festivals and users
     if request.method == 'POST':
         story_form = StoryForm(request.POST)
         if story_form.is_valid():

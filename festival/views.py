@@ -46,14 +46,10 @@ def view_shareStory(request,id):
 
     context_dict = {}
     try: 
-       # festival = Festival.objects.get(festivalSlug=festival_name_slug)
-
         festival = Festival.objects.get(id=id)
         stories = Story.objects.filter(festival=id)
-     #   comment = Comment.objects.filter(festival)
         context_dict['festival'] = festival
         context_dict['stories'] = stories
-     #   context_dict['comments'] = comment
 
     except Festival.DoesNotExist:
         context_dict['stories'] = None
