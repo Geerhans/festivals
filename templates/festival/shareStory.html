@@ -29,7 +29,6 @@
                 {% for story in stories %}
                     <hr>
                     <div id="container1">
-                        <p>
                             <strong id="userName"> 
                                 <img id="img" src="{% static 'images/user.png' %}"alt="Avatar" />
                                 {{ story.user|upper }} 
@@ -37,7 +36,6 @@
                             <strong id="msg">
                                 {{ story.created|date:"d-m-Y H:i" }}
                             </strong>
-                        </p >
                         <div id="msg2">
                           {{ story.body }}
                         </div>
@@ -57,8 +55,8 @@
                         <div  id="container2">
                             <div class="form-group">
                                 <div>
-                                    <textarea type="text"  id="txtArea" name="body" rows="2"
-                                  placeholder="Share your story" ></textarea>
+                                    <textarea type="text"  id="txtArea" name="body" maxlength="1250"
+                                  rows= "6" placeholder="Share your story" ></textarea>
                                   </div>
                             </div>
                             <button id="btn" type="submit">Post</button>
