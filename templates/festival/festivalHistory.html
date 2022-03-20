@@ -9,10 +9,10 @@
     <div id="container">
             {% if festival %}
             <h1 id="h1"> {{festival.festivalname}}</h1>
-              <div id="main1">  
+                <div id="main1">  
                   <p>{{festival.body|linebreaks}}</p>
             
-            </div>
+                </div>
                 <div>
                     {% if country %}
                     <a id="goback" href="{% url 'festival:view_country' country.slug %}">Go Back</a>
@@ -26,8 +26,6 @@
             {% else %}
             The specified festival does not exist.
             {% endif %} 
-           
-        </div>
     </div>
         
     {% endblock %}
