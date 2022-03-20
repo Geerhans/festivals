@@ -6,6 +6,7 @@
     {% endblock %} 
 
     {% block body_block %}
+ 
     <div id="container">
         
         <div id="header">
@@ -24,8 +25,9 @@
                 <a href="{% url 'auth_login' %}" class="btn-3d">Login</a>
                 {% endif %}
             </ul>  
-        </div> 
-
+        </div>
+ 
+            
          <h1 id="h1">ShareFestival</h1>
 
         <div id="main">
@@ -36,7 +38,7 @@
                             {% for country in countries %}
                             <li>
                                 <div id="main_country">
-                                        <img class="bg1" src="{% static 'images/spring.jpg' %}"alt="Picture of Country" />
+                                        <img class="bg1" style="object-fit: contain;" src="{% static 'images/' %}{{country.countryname}}.jpg"alt="Picture of Country" />
                                         <a href="{% url 'festival:view_country' country.slug %}">{{country.countryname|upper}}</a>
                                 </div>
                             </li>
