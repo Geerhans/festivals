@@ -18,8 +18,9 @@ How to run the project:
 
 5. Install dependencies - pip install -r requirements.txt
 
-6. Configure and pre-populate the application - python manage.py makemigrations festival
-python manage.py migrate
-python population_script.py
+6. Configure and pre-populate the application - 
+        python manage.py makemigrations festival
+        python manage.py migrate
+        python population_script.py
 
 7. Start the application - python manage.py runserver
