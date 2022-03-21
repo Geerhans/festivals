@@ -1,4 +1,4 @@
-# festivals
+# ShareFestival
 
 ShareFestival features an festival guide for everything you need to know about an exiciting festival in different countries. It is a 
 platform to expose our users to different festivals around the world and to share their thoughts and experiences. A way to celebrate our 
@@ -20,7 +20,9 @@ How to run the project:
 
 6. Configure and pre-populate the application - 
         python manage.py makemigrations festival
+        
         python manage.py migrate
+        
         python population_script.py
 
 7. Start the application - python manage.py runserver
