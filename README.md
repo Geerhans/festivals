@@ -22,4 +22,4 @@ How to run the project:
 python manage.py migrate
 python population_script.py
 
-7. Start teh application - python manage.py runserver
+7. Start the application - python manage.py runserver
