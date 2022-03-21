@@ -1,6 +1,6 @@
 from django.test import TestCase
-import festival
-from festival.models import Country, Festival
+from festival.models import Country, Festival, User
+from festival.forms import UserProfileForm, UserForm
 from django.urls import reverse
 # Create your tests here.
 
@@ -19,6 +19,7 @@ def add_festival(festivalname, festivalID=0):
     return festival
 
 class CountryMethodTests(TestCase):
+    """ A test class to check the countries and its associated features """
     def test_ensure_countryID_are_positive(self):
         country = Country(countryname='test', countryID=-1)
         country.save()
@@ -43,12 +44,14 @@ class CountryMethodTests(TestCase):
     
 
 
-class IndexViewTests(TestCase):
+class ViewTests(TestCase):
+    """ A test class to check the views """
     def test_index_view_with_no_countries(self):
         response = self.client.get(reverse('festival:index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'There are no countries present.')
         self.assertQuerysetEqual(response.context['countries'], [])
+        self.assertTemplateUsed(response, 'festival/index.html')
 
     def test_country_view_with_no_festival(self):
         china = add_country('China', 1)
@@ -56,6 +59,7 @@ class IndexViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'No festivals currently in the selected country.')
         self.assertQuerysetEqual(response.context['festivals'], [])
+        self.assertTemplateUsed(response, 'festival/country.html')
 
     def test_shareStory_view(self):
         festival = add_festival('NationalDay', 1)
@@ -66,10 +70,12 @@ class IndexViewTests(TestCase):
         festival = add_festival('NationalDay', 1)
         response = self.client.get(reverse('festival:view_festivalHistory', kwargs={'festival_name_slug': festival.slug}))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'festival/festivalHistory.html')
 
     def test_about_view(self):
         response = self.client.get(reverse('festival:about'))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'festival/about.html')
         
     def test_personalCenter_view(self):
         response = self.client.get(reverse('festival:personalCenter'))
@@ -78,6 +84,7 @@ class IndexViewTests(TestCase):
     def test_contact_view(self):
         response = self.client.get(reverse('festival:contact'))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'festival/contactUs.html')
 
     def test_index_view_with_countries(self): 
         add_country('China', 1)
@@ -90,3 +97,32 @@ class IndexViewTests(TestCase):
         self.assertContains(response, "UK")
         num_categories = len(response.context['countries'])
         self.assertEquals(num_categories, 3)
+        self.assertTemplateUsed(response, 'festival/index.html')
+        
+    def login_template(self):
+        response = self.client.get(reverse('auth_login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/login.html')
+
+    def Register_template(self):
+        response = self.client.get(reverse('registration_register'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/registration_form.html')
+
+
+class TestForms(TestCase):
+    """ A test class to check if accurate forms are created """
+    def test_user_profile_form_is_being_created(self):
+        self.assertIsNotNone(UserProfileForm())
+
+    def test_user_form_is_being_created(self):
+        self.assertIsNotNone(UserForm())
+
+class RegisterViewTests(TestCase):
+    def setUp(self):
+        User.objects.create_user('username', 'email', 'password').save()
+
+
+
+   
+ 
