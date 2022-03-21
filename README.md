@@ -28,7 +28,8 @@ How to run the project:
         
         pip install -r requirements.txt
 
-6. Configure and pre-populate the application  
+6. Configure and pre-populate the application 
+ 
         python manage.py makemigrations festival
         
         python manage.py migrate
