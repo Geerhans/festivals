@@ -25,6 +25,8 @@ class Country(models.Model):
     slug = models.SlugField(blank=True,unique=True)
     
     def save(self, *args, **kwargs):
+        if self.countryID < 0:
+            self.countryID = 0
         self.slug = slugify(self.countryname) 
         super(Country, self).save(*args, **kwargs)
 
@@ -46,6 +48,8 @@ class Festival(models.Model):
     image_url=models.URLField(max_length=200,default="spring.jpg")
 
     def save(self, *args, **kwargs):
+        if self.festivalID < 0:
+            self.festivalID = 0
         self.slug = slugify(self.festivalname) 
         super(Festival, self).save(*args, **kwargs)
 
